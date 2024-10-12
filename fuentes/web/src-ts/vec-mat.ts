@@ -27,12 +27,40 @@ export class Vec2 extends Float32Array
    public get y() { return this[1] }
 
    /**
+    * Calcula la longitud de un vector
+    */
+   public get longitud () : number 
+   {
+      return Math.sqrt( this[0]*this[0] + this[1]*this[1] )
+   }
+
+   /**
     * Devuelve un nuevo vector con los mismos valores que este (clona)
     * @returns nuevo vector 
     */
    public clonar() : Vec2
    {
-      return new Vec2([ this.x, this.y ])
+      return new Vec2([ this[0], this[1] ])
+   }
+
+   /**
+    * Calcula la suma de este vector y otro
+    * @param otro el otro vector 
+    * @returns    vector suma
+    */
+   public mas( otro : Vec2 ) : Vec2
+   {
+      return new Vec2([ this[0]+otro[0], this[1]+otro[1] ])
+   }
+
+   /**
+    * Calcula la resta de este vector y otro
+    * @param otro el otro vector 
+    * @returns    vector resta
+    */
+   public menos( otro : Vec2 ) : Vec2
+   {
+      return new Vec2([ this[0]-otro[0], this[1]-otro[1] ])
    }
 }
 

@@ -13,7 +13,7 @@ import { Textura } from "./texturas.js"
 import { MallaPLY } from "./malla-ply.js"
 import { CrearInputCheckbox, CrearSelector, CrearInputColor, CrearInputSlider, CrearInputBoton } from "./controles.js"
 import { FuenteLuz, ColeccionFuentesLuz } from "./fuente-luz.js"
-import { MallaEsfera, MallaCilindro, MallaCono, MallaColumna, MallaCuadradoXY, MallaToroide } from "./malla-sup-par.js"
+import { MallaEsfera, MallaCilindro, MallaCono, MallaColumna, MallaCuadradoXY, MallaToroide, MallaCampoAlturas } from "./malla-sup-par.js"
 import { Material } from "./material.js"
 import { GrafoTest, GrafoTest2 } from "./grafo-escena.js"
 import { OC_GrafoTest, OC_GrafoTest2 } from "./objeto-comp.js"
@@ -449,6 +449,9 @@ export class AplicacionWeb
       this.objetos.push( new MallaColumna( 256, 256 ) )
       this.camaras.push( new CamaraOrbital3D() )
 
+      this.objetos.push( new MallaCampoAlturas( 512, 512 ) )
+      this.camaras.push( new CamaraOrbital3D() )
+
       this.objetos.push( new GrafoTest( await Textura.crear("/imgs/bazinga.jpg" ) ) )
       this.camaras.push( new CamaraOrbital3D() )
 
@@ -476,6 +479,8 @@ export class AplicacionWeb
 
       this.objetos.push( await MallaPLY.crear( "/plys/ant.ply" ) )
       this.camaras.push( new CamaraOrbital3D() )
+
+    
 
 
       // centrar y normalizar todos los objetos que sean un nodo terminal de tipo MallaPLY

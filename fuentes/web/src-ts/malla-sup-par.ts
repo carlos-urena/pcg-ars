@@ -1,8 +1,19 @@
-import { Assert } from "./utilidades.js"
-import { Vec2, Vec3, UVec3 } from "./vec-mat.js"
-import { MallaInd } from "./malla-ind.js"
-import { AplicacionWeb } from "./aplicacion-web.js"
-import { FuncionParam, FPCuadradoXY, FPEsfera, FPCilindro, FPCono, FPColumna, FPToroide } from "./sup-par.js"
+import { Assert } 
+from "./utilidades.js"
+
+import { Vec2, Vec3, UVec3 } 
+from "./vec-mat.js"
+
+import { MallaInd } 
+from "./malla-ind.js"
+
+import { AplicacionWeb } 
+from "./aplicacion-web.js"
+
+import { FuncionParam, FPCuadradoXY, FPEsfera, 
+         FPCilindro, FPCono, FPColumna, 
+         FPToroide, FPCampoAlturas } 
+from "./sup-par.js"
 
 
 
@@ -127,6 +138,16 @@ export class MallaToroide extends MallaSupPar
    constructor( ns : number, nt : number )
    {
       super( new FPToroide(), ns, nt )
+      this.promediarNormalesCol()
+   }
+}
+
+
+export class MallaCampoAlturas extends MallaSupPar 
+{
+   constructor( ns : number, nt : number )
+   {
+      super( new FPCampoAlturas(), ns, nt )
       this.promediarNormalesCol()
    }
 }

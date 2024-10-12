@@ -172,3 +172,31 @@ export class FPToroide extends FuncionParam
       return new Vec3([ (1.0+0.5*cb)*ca, 0.5*sb, (1.0+0.5*cb)*sa ])
    }
 }
+
+export class FPCampoAlturas extends FuncionParam 
+{
+   private ptos = [  new Vec2([ 0.2, 0.6 ]), 
+                     new Vec2([ 0.75, 0.6 ]), 
+                     new Vec2([ 0.5, 0.2 ]), 
+                     new Vec2([ 0.2, 0.8 ]),
+                     new Vec2([ 0.85, 0.8 ]) ]
+
+   constructor() 
+   {
+      super()
+      this.nombre = "campo de alturas"
+   }
+
+   public evaluarPosicion( st : Vec2 ) : Vec3
+   {
+      
+      let h = 0.0 
+
+      for( const p of this.ptos ) 
+      {
+         const d = 20.0*st.menos( p ).longitud
+         h += 0.5/(1.0 + d*d*d)
+      }
+      return new Vec3([ st[0], h, st[1] ])
+   }
+}
