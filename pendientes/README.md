@@ -1,6 +1,6 @@
-# Repositorio para las asignaturas PCG y ARS del MDS
+# Cosas pendientes de los fuentes de PCG y ARS 
 
-## Cosas pendientes 
+## Aplicación Web
 
 - En la aplicación Web, cuando se activa el cauce de visualización, está activado el uso de sombras arrojadas, pero:
 
