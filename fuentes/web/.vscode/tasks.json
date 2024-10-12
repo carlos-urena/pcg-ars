@@ -1,0 +1,25 @@
+// https://code.visualstudio.com/docs/editor/tasks#_custom-tasks
+
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label"   : "Compilar",
+      "type"    : "shell",
+      "command" : "cd ./scripts && make && echo 'Compilación ok'",
+      "group"   : 
+      {
+        "kind"         : "build",
+        "isDefault"    : true
+      },
+      "problemMatcher" : "$tsc",
+      "presentation"   : 
+      {
+        "reveal"           : "always",
+        "clear"            : true,
+        "revealProblems"   : "onProblem",
+        "showReuseMessage" : false
+      }
+    }
+  ]    
+}
