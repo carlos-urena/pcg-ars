@@ -1,0 +1,47 @@
+{
+  "folders":
+  [ { 
+      "name": "IG-BUILD-MACOS",
+      "path": "."
+    },
+    { 
+      "name": "MATERIALES",
+      "path": "../../materiales"
+    },
+    { 
+      "name": "FUENTES-CPP",
+      "path": "../../src/cpp"
+    },
+    { "name": "FUENTES-SHADERS",
+      "path": "../../src/shaders"
+
+    }
+
+  ],
+
+  "settings" :
+  {
+    "C_Cpp.default.cppStandard" : "c++11",
+    //"C_Cpp.default.includePath" : [ "${workspaceFolder:MATERIALES}/src-cpp", "${default}" ],
+    "C_Cpp.default.includePath" : [ "${workspaceFolder:FUENTES-CPP}", "${default}" ],
+    
+    
+    // indicar extensiones recomendadas y extensiones que no se deben usar (y que no queremos que se recomienden)
+    
+    "extensions" : 
+    {
+      "recommendations": 
+      [ 
+        "ms-vscode.cpptools", 
+        "ms-vscode.cpptools-extension-pack", 
+        "ms-vscode.cpptools-themes", 
+        "slevesque.shader"    // soporte para archivos .glsl en GLSL
+      ],
+      "unwantedRecommendations": 
+      [
+        "ms-vscode.makefile-tools",  // no queremos que VS code gestione makefiles 
+        "ms-vscode.cmake-tools"      // tampoco los archivos 'CMakeFiles.txt'
+      ]
+    }, 
+  }
+}
