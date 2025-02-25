@@ -75,6 +75,7 @@
 
 
 // includes de GLM
+#define GLM_ENABLE_EXPERIMENTAL       // ¿ necesario en macOs ?
 #include <glm/glm.hpp>                // incluye cosas básicas de GLM (vectores y matrices)
 #include <glm/gtc/type_ptr.hpp>       // conversion de vectores y matrices hacia/desde 'float *' con 'value_ptr' (https://glm.g-truc.net/0.9.9/api/a00305.html)
 #include <glm/gtc/matrix_access.hpp>  // acceso a filas y columnas de una matriz, con glm::row( mat4 )
