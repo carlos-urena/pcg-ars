@@ -10,7 +10,7 @@ export class ProgramObject
     private fragment_shader  : ShaderObject | null = null
     private vertex_shader    : ShaderObject | null = null 
     private gl               : ContextoWebGL      // contexto usado para crear este programa
-    private programa_wgl_act   : WebGLProgram | null = null // objeto programa encapsulado (null si todavía no compilado)
+    private programa_wgl_act : WebGLProgram | null = null // objeto programa encapsulado (null si todavía no compilado)
     
     // --------------------------------------------------------------------------------------------
 

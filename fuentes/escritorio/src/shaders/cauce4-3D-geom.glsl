@@ -69,7 +69,7 @@ void TriangulosEnAristas()
     // calcular el centro y los tres vectores desde el centro a los vértices
     vec3 centro = (v3_posic_ecc[0].xyz + v3_posic_ecc[1].xyz + v3_posic_ecc[2].xyz) / 3.0 ;
     
-    const float g = 0.05 ; // grosor relativo de las ariastas
+    const float g = 0.15 ; // grosor relativo de las ariastas
 
     // emitir una tira con 6 triángulos (2 triángulos por arista)
     // para eso se emiten 8 vértices (2 por iteración del bucle)

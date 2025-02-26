@@ -167,6 +167,26 @@ export class AplicacionWeb
     * Elemento HTML de tipo 'input' (checkbox) para el botón de visualizar normales
     */
    private input_boton_normales : HTMLInputElement | null = null
+
+   /**
+    * Elemento HTML de tipo 'input' (checkbox) para el botón de activar/desactivar iluminación
+    */
+   private input_boton_iluminacion : HTMLInputElement | null = null
+
+   /**
+    * Indica si la iluminación está activada o no 
+    */
+   private iluminacion : boolean = true
+
+   /**
+    * Elemento HTML de tipo 'input' (checkbox) para el botón de activar/desactivar sombras arrojadas
+    */
+   private input_boton_sombras_arrojadas : HTMLInputElement | null = null
+
+   /**
+    * Indica si las sombras arrojadas  están activadas o no 
+    */
+   //private sombras_arrojadas : boolean = true
    
    /**
     *  Elemento HTML de tipo 'select' para el selector de objeto actual
@@ -231,17 +251,6 @@ export class AplicacionWeb
     * Indice de la fuente de luz actual
     */
    private ind_fuente : number = 0
-
-   /**
-    * Elemento HTML de tipo 'input' (checkbox) para el botón de activar/desactivar iluminación
-    */
-   private input_boton_iluminacion : HTMLInputElement | null = null
-
-   
-   /**
-    * Indica si la iluminación está activada o no 
-    */
-   private iluminacion : boolean = true
 
    /**
     * Material por defecto:
@@ -611,6 +620,19 @@ export class AplicacionWeb
    // ------------------------------------------------------------------------- 
 
    /**
+    * Crea el check box para visualizar aristas si/no 'this.input_boton_normales'
+    */
+   private crearCheckboxSombrasArrojadas()
+   {
+      const nombref : string = 'AplicacionWeb.crearCheckboxSombrasArrojadas'
+
+      this.input_boton_sombras_arrojadas = CrearInputCheckbox( this.controles, this.evaluar_sombras,
+                                       'id_boton_sombras_arrojadas', 'Sombras arrojadas' )
+      this.input_boton_sombras_arrojadas.onclick = () => this.fijarSombrasArrojadas( ! this.evaluar_sombras )
+   }
+   // ------------------------------------------------------------------------- 
+
+   /**
     * Crear un selector para el objeto actual (asigna a 'this.selector_objeto_actual')
     */
    private crearSelectorObjetoActual() : void
@@ -877,6 +899,7 @@ export class AplicacionWeb
       this.crearCheckboxAristas()
       this.crearCheckboxNormales()
       this.crearCheckboxIluminacion()
+      this.crearCheckboxSombrasArrojadas()
       this.crearSelectorObjetoActual()
       this.crearInputColorDefecto()
       this.crearSlidersDirLuz()
@@ -1372,7 +1395,7 @@ export class AplicacionWeb
    /**
     * Activa o desactiva la iluminacion
     * 
-    * @param nuevo_visualizar_normales (boolean) true para activar, false para desactivar 
+    * @param nuevo_iluminacion (boolean) true para activar, false para desactivar 
     */
    fijarIluminacion( nuevo_iluminacion : boolean  ) : void 
    {
@@ -1382,6 +1405,24 @@ export class AplicacionWeb
       if ( this.input_boton_iluminacion != null )
          this.input_boton_iluminacion.checked = this.iluminacion 
       const msg : string = `Iluminación: ${this.iluminacion ? "activada" : "desactivada"}`
+      this.estado = msg 
+      window.requestAnimationFrame( VisualizarFrameAplicacionWeb )
+   }
+   // ------------------------------------------------------------------------------------
+   
+   /**
+    * Activa o desactiva las sombras arrojadas
+    * 
+    * @param nuevo_sombras_arrojadas (boolean) true para activar, false para desactivar 
+    */
+   fijarSombrasArrojadas( nuevo_sombras_arrojadas : boolean  ) : void 
+   {
+      const nombref = 'AplicacionWeb.fijarSombrasArrojadas'
+      this.evaluar_sombras = nuevo_sombras_arrojadas
+
+      if ( this.input_boton_sombras_arrojadas != null )
+         this.input_boton_sombras_arrojadas.checked = this.evaluar_sombras
+      const msg : string = `Sombras arrojadas: ${this.evaluar_sombras ? "activada" : "desactivada"}`
       this.estado = msg 
       window.requestAnimationFrame( VisualizarFrameAplicacionWeb )
    }

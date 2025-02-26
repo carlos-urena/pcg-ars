@@ -16,7 +16,7 @@ export class Vec2 extends Float32Array
 {
    constructor( arr : Array<number> )
    {
-      Assert( arr.length == 2, "Vec2.constructor - se deben dar 16 valores reales" )
+      Assert( arr.length == 2, "Vec2.constructor - se deben dar 2 valores reales" )
       super( arr )
 
    }
