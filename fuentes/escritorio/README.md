@@ -117,6 +117,14 @@ Si la compilación va bien se genera el ejecutable, que tiene el nombre  `debug_
 
 Para forzar un recompilado de todos los fuentes, basta con vaciar la carpeta `cmake` y volver a hacer `cmake ..` en ella. Es necesario hacerlo si se añaden o quitan unidades de compilación o cabeceras de las carpetas con los fuentes.
 
+Para ejecutar el archivo, se debe de ir a la carpeta `bin` y escribir:
+
+```
+./debug_exe
+``` 
+
+también se puede ejecutar desde cualquier otra carpeta, incluyendo el path relativo hasta `bin` desde esa carpeta de trabajo.
+
 
 ### Windows
 
@@ -157,6 +165,14 @@ $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Obj
 Si no se quiere teclear esto en cada inicio de sesión, se puede añadir esa línea al archivo de script (tipo `.ps1`) que se ejecuta cada vez que se abre _Powershell_, el nombre comleto de dicho archivo está en la variable de entorno `$profile` de _Powershell_.
 
 (Nota: todo esto se ha probado probado en Febrero de 2024 en Windows 11).
+
+Para ejecutar ela versión _debug_ del programa podemos ir a la carpeta `bin\Debug` y escribir:
+
+```
+.\ejecutable.exe 3da
+```
+
+
 
 ## Uso de VS Code en Linux, macOS y Windows.
 
