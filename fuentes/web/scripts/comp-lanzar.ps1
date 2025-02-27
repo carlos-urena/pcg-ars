@@ -1,4 +1,5 @@
-#/bin/bash -f   
+# PCG-ARS
+# Script Powershell que compila los archivos .ts y lanza un servidor web  
 
 $dir_src_ts    = "../src-ts"
 $dir_js        = "../public_html/js"
@@ -11,13 +12,17 @@ tsc @opciones @archs_ts_path
 ## si no ha habido errores, lanzar servidor, si ha habido, no hacer nada
 
 if ( $LASTEXITCODE -ne 0 ) {
-   echo "Han habido errores en la compilación"
+   echo "Han habido errores en la compilacion"
 }
 else 
 {
-   echo "compilación ha ido bien"
-   ##echo "Lanzando servidor, página raiz en 'localhost:8000' (o 'http://localhost:8000')" 
+   echo "La compilacion ha ido bien"
+   echo "La URL de la pagina es: http://localhost:8000 - o bien: http://127.0.0.1:8000"
    Pushd ../public_html 
-   python3 -m http.server
-   Popd
+   try {
+      python3 -m http.server
+   }
+   finally {
+      Popd
+   }
 }
