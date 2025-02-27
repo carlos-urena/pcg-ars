@@ -465,6 +465,8 @@ export class Cauce extends CauceBase
 
         this.eval_sombras = nuevo_eval_sombras
         gl.uniform1i( this.loc_eval_sombras, b2n( this.eval_sombras ) )
+        //Log(`## CAUCE ## ${fname} sombras activadas: ${this.eval_sombras}`)
+        //Log(`## CAUCE ## ${fname} location eval_sombras: ${this.loc_eval_sombras}`)
         
         if ( this.eval_sombras ) 
         { 
@@ -477,16 +479,14 @@ export class Cauce extends CauceBase
             let sx = fbo_sombras.tamX
             let sy = fbo_sombras.tamY
             let mt = CMat4.traslacion( new Vec3([ 1.0, 1.0, 0.0 ]) ) // (1) dejar coords X e Y en [0..2] (estaban en -1..1)
-            let ms = CMat4.escalado( new Vec3([sx/2.0,sy/2.0,1.0]) )       // (2) dejar coords X en (0..tamX), Y en (0..tamY)
+            let ms = CMat4.escalado( new Vec3([sx/2.0,sy/2.0,1.0]) ) // (2) dejar coords X en (0..tamX), Y en (0..tamY)
             this.mat_vp_sombras = ms.componer( mt.componer( nuevo_mat_vp_sombras ) )
             
             gl.uniformMatrix4fv( this.loc_mat_vp_sombras, true, this.mat_vp_sombras )
             gl.activeTexture( gl.TEXTURE1 ) // la textura de sombras se asocia a la unidad 1
             gl.bindTexture( gl.TEXTURE_2D, fbo_sombras.cbuffer )
             gl.activeTexture( gl.TEXTURE0 ) // la textura de color se asocia a la unidad 0, lo dejo así por si acaso
-
         }
-
         ComprErrorGL( gl, `${fname} error al final`)
     }
 

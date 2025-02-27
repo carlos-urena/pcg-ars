@@ -1101,6 +1101,8 @@ export class AplicacionWeb
       // indica si se debe evaluar las sombras o no
       const eval_sombras : Boolean = eval_iluminacion && this.evaluar_sombras
 
+      Log(`#### --> eval_sombras == ${eval_sombras}`)
+
       // si están activadas las sombras, visualizar el objeto sobre el FBO de sombras
       if ( eval_sombras )
       {
@@ -1163,13 +1165,16 @@ export class AplicacionWeb
       else 
          cauce.fijarEvalMIL( false )
 
-      // // si se activan sombras, fijar la textura del FBO de sombras en la unidad 1
+      // Si se activan sombras, fijar la textura del FBO de sombras en la unidad 1
+      // (en otro caso, desactivar las sombras en el cauce
       if ( eval_sombras )
       {
          if ( this.cauce_sombras == null ) 
             throw new Error(`{fname} debería haber un cauce de sombras`)
          cauce.fijarSombras( true, this.cauce_sombras.fbo,  this.cauce_sombras.mat_vista_proy )
       }
+      else 
+         cauce.fijarSombras( false, null, null )
 
 
       // dibujar el objeto actual 

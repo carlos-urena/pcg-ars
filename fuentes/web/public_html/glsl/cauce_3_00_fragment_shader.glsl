@@ -62,7 +62,7 @@ uniform float u_param_s ;         // parámetro S
 
 // 8. sombras (pruebas)
 uniform sampler2D u_tex_sombras ;  // segundo sampler, sombras ¿ ligado a la unidad 1 ?
-uniform bool      u_usar_sombras ; // true --> usar sombras, false --> no usar sombras
+uniform bool      u_eval_sombras ; // true --> usar sombras, false --> no usar sombras
 uniform mat4      u_mat_vp_sombras ; // matriz de vista+proyección para sombras, pasa de WCC a coordenadas de de la cámara que se usa para sombras
 
 
@@ -165,6 +165,9 @@ bool EnSombraArrojada()
 
 float FactorSombraArrojada()
 {
+   if ( ! u_eval_sombras )
+      return 1.0 ;
+
    // calcular coordenadas del punto en el marco de coordenadas de la fuente.
    vec4 posic_fcc = u_mat_vp_sombras * v_posic_wcc ;
 
