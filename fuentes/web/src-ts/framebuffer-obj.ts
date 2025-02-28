@@ -21,6 +21,7 @@ export class FramebufferObject
     private color_buffer : WebGLTexture | null = null
     private depth_buffer : WebGLRenderbuffer | null = null
     private rectXY       : CuadradoXYcct | null = null
+    private color_formato_float : Boolean = false
 
     protected get fbo() : WebGLFramebuffer 
     { 
@@ -49,13 +50,19 @@ export class FramebufferObject
         Assert( sizex > 0 && sizey > 0, `${fname} tamaño del framebuffer inválido (${sizex} x ${sizey})` )
         Log( `${fname} creando framebuffer de tamaño: ${sizex} x ${sizey}` )
         
+        // datos de formato para el buffer de color (que tiene las profundidades)
+        // es un buffer de 4 bytes por pixel (RGBA)
+        // https://registry.khronos.org/webgl/specs/latest/2.0/#TEXTURE_TYPES_FORMATS_FROM_DOM_ELEMENTS_TABLE
         let format  : number = gl.RGBA 
         let type    : number = gl.UNSIGNED_BYTE
         let iFormat : number = gl.RGBA
         
-        let usar_formato_float = false
+        // Se puede activar el uso de texturas de 32 bits flotantes para el color
+        // (para guardar las distancias a las luces en sombras)
+        // Pero NO FUNCIONA (por ahora)
+        // this.color_formato_float = true
 
-        if ( usar_formato_float )
+        if ( this.color_formato_float )
         {
             // https://developer.mozilla.org/en-US/docs/Web/API/EXT_color_buffer_float
             // https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Using_Extensions
@@ -67,7 +74,11 @@ export class FramebufferObject
             if ( color_ext == null )
                 throw new Error(`${fname} no se ha podido activar la extensión 'EXT_color_buffer_float' (para framebuffers de 32 bits flotantes)`)
 
-            format  = gl.RED 
+            // var las opciones de 'format', 'type' e 'iFormat' aquí: 
+            // https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/texImage2D
+            // y las combinaciones válidas en esta tabla:
+            // https://registry.khronos.org/webgl/specs/latest/2.0/#TEXTURE_TYPES_FORMATS_FROM_DOM_ELEMENTS_TABLE
+            format  = gl.RED
             type    = gl.FLOAT
             iFormat = gl.R32F
         }
@@ -95,9 +106,20 @@ export class FramebufferObject
         ComprErrorGL( gl, `${fname} textura creada con error`)
 
         // crear y activar el bufer de profundidad
+        let depth_internal_format : GLenum = gl.DEPTH_COMPONENT16
+        if ( gl instanceof WebGL2RenderingContext ) 
+        {
+            //depth_internal_format = gl.DEPTH_COMPONENT24 ;
+            //Log(`### ${fname} FramebufferObject: usando 24 bits para el buffer de profundidad`);
+            depth_internal_format = gl.DEPTH_COMPONENT32F ;
+            Log(`### ${fname} FramebufferObject: usando 32 bits (flotantes) para el buffer de profundidad`);
+        }
+        else
+            Log(`### ${fname} FramebufferObject: usando 16 bits para el buffer de profundidad`);
+
         this.depth_buffer = gl.createRenderbuffer()
         gl.bindRenderbuffer( gl.RENDERBUFFER, this.depth_buffer )
-        gl.renderbufferStorage( gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, this.sizex, this.sizey )
+        gl.renderbufferStorage( gl.RENDERBUFFER, depth_internal_format, this.sizex, this.sizey )
 
         ComprErrorGL( gl, `${fname} buffer de profundidad creado con error`)
 
@@ -123,7 +145,7 @@ export class FramebufferObject
         const status : GLenum = gl.checkFramebufferStatus( gl.FRAMEBUFFER )
         if ( status != gl.FRAMEBUFFER_COMPLETE )
         {
-            const msg : string = `${fname} el estado del framebuffer no es 'COMPLETE', es: ${status}`
+            const msg : string = `${fname} el estado del framebuffer para sombras no es 'COMPLETE', es: ${status}`
             Log( msg )
             throw new Error( msg )
         }

@@ -1,6 +1,6 @@
 #version 300 es
 
-precision highp float ;
+precision highp float ; // --> funciona con colores RGB codificados
 precision highp int ;
 
 // *********************************************************************
@@ -182,8 +182,14 @@ float FactorSombraArrojada()
    for( int i = 0 ; i < ns_root ; i++ )
    for( int j = 0 ; j < ns_root ; j++ )
    {
+      // FUNCIONA: usar texelFetch con un sampler de 3 canales RGB
       vec4 rgb = texelFetch( u_tex_sombras, csi + ivec2( i-c, j-c ), 0 ) ;
       float z = DecodificarDeRGB( rgb.rgb ) ;
+      
+      // NO FUNCIONA: usar texelFetch con un sampler de 1 canal float 32
+      //vec4  zfetch = texelFetch( u_tex_sombras, csi + ivec2( i-c, j-c ), 0 ) ;
+      //float z = zfetch.b ; // si se usa sombras con opción de 1 canal float 32, no es necesario decodificar ?? 
+      
       if ( posic_fcc.z > z+0.01 )
          suma += 1.0 ;
    }

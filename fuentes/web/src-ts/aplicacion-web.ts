@@ -1101,7 +1101,7 @@ export class AplicacionWeb
       // indica si se debe evaluar las sombras o no
       const eval_sombras : Boolean = eval_iluminacion && this.evaluar_sombras
 
-      Log(`#### --> eval_sombras == ${eval_sombras}`)
+      //Log(`#### --> eval_sombras == ${eval_sombras}`)
 
       // si están activadas las sombras, visualizar el objeto sobre el FBO de sombras
       if ( eval_sombras )
@@ -1113,7 +1113,7 @@ export class AplicacionWeb
          this.cauce_sombras.fijarDimensionesFBO( this.res_fbo_somb, this.res_fbo_somb )
          this.cauce_sombras.fijarDireccionVista( v )
          this.cauce_sombras.visualizarGeometriaObjeto( objeto )
-         Log(`${nombref} frame: ${this.cuenta_frames} visualizado objeto sobre el FBO de sombras, dir == ${v}`)
+         //Log(`${nombref} frame: ${this.cuenta_frames} visualizado objeto sobre el FBO de sombras, dir == ${v}`)
       }
 
       // reactivar el framebuffer por defecto y el cauce

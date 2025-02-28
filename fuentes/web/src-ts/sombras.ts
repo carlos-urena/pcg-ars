@@ -63,8 +63,9 @@ glsl`#version 300 es
     in vec4 pos_ndc;
 
     out vec4 color;
+    //out float color ;  // NO FUNCIONA
 
-    // NO uso esto:
+    // NO uso esto (NO FUNCIONA)
     // https://stackoverflow.com/questions/32558579/single-component-texture-with-float
 
     // Uso mi propia versión:
@@ -104,8 +105,13 @@ glsl`#version 300 es
     void main()
     {
         
+        // FUNCIONA: codifica en RGB
         vec3  c = codificarEnRGB( pos_ndc.z );
         color = vec4( c, 1.0 );
+        
+        // NO FUNCIONA 
+        //float v = 0.5*(1.0+pos_ndc.z) ;
+        //color = v ; // vec4( v, v, v, 1.0);  // hay que pasar de [-1,1] a [0,1], igual que al inicio de 'codificarEnRGB'
         
         // des-comentar para comprobar el error (deben verse verdes todos los pixels)
         //float d = decodificarDeRGB( c ) - pos_ndc.z;

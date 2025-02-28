@@ -19,6 +19,7 @@ export type TablaFloatV2  = Float32Array | number[] | Vec2[]
 // Tipo para tablas o arrays que contienen una secuencia de enteros sin signo o de UVec3
 export type TablaUnsigned = Uint8Array | Uint16Array | Uint32Array  | number[] | UVec3[] 
 
+// ----------------------------------------------------------------------------
 
 /**
  * Tipo para un contexto de rendering WebGL, que puede ser de la 
@@ -68,6 +69,11 @@ export class CajaEnglobante
    private min_pos : Vec3 = new Vec3([0,0,0])
    private max_pos : Vec3 = new Vec3([0,0,0])
 
+   /**
+    * Construye una caja englobante dados dos puntos opuestos
+    * @param min_ini 
+    * @param max_ini 
+    */
    public constructor( min_ini : Vec3, max_ini : Vec3 )
    {
       const fname = "CajaEnglobante.constructor"
@@ -78,8 +84,12 @@ export class CajaEnglobante
 
       this.min_pos = min_ini.clonar()
       this.max_pos = max_ini.clonar() 
-
    }
+   /**
+    * Construye una caja englobante minima que incluye todas las posiciones en un vector de puntos.
+    * @param puntos vector de posiciones de puntos, no puede estar vacío (Vec3[])
+    * @returns la caja englobante
+    */
    public static desdePuntos( puntos : Vec3[] ) : CajaEnglobante
    {
       if ( puntos.length == 0 )
@@ -90,6 +100,12 @@ export class CajaEnglobante
          caja.mezcla( puntos[i] )
       return caja
    }
+
+   /**
+    * Hace una 'mezcla' de esta caja englobante con un punto, es decir,
+    * agranda la caja englobantes lo mínimo para que contenga al punto.
+    * @param pos punto a mezclar
+    */
    public mezcla( pos : Vec3 )
    {
       for( let i = 0; i < 3; i++ )  
@@ -142,7 +158,7 @@ export function Assert( condition : boolean, msg? : string ) : asserts condition
          else 
             texto = `: ${msg}`
 
-         throw new Error( `la condición de un Assert es falsa${texto}` )
+         throw new Error( `la condición de un Assert es falsa ${texto}` )
       }
 }
 
@@ -172,6 +188,8 @@ export function ComprErrorGL( gl : WebGLRenderingContext | WebGL2RenderingContex
    Assert( gl.getError() == gl.NO_ERROR, msg )
 }
 
+// -------------------------------------------------------------------
+
 /**
  * Construye y devuelve una promesa que se resuelve cuando hayan pasado un 
  * número de milisegundos que se pasa como parámetro
@@ -183,7 +201,6 @@ export function Milisegundos( milliseconds : number ) : Promise<void>
 {
    return new Promise( resolve => setTimeout(resolve, milliseconds) ) 
 }
-// -------------------------------------------------------------------
 
 // -----------------------------------------------------------------------------
 
