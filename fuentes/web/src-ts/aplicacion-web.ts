@@ -15,7 +15,7 @@ import { CrearInputCheckbox, CrearSelector, CrearInputColor, CrearInputSlider, C
 import { FuenteLuz, ColeccionFuentesLuz } from "./fuente-luz.js"
 import { MallaEsfera, MallaCilindro, MallaCono, MallaColumna, MallaCuadradoXY, MallaToroide, MallaCampoAlturas } from "./malla-sup-par.js"
 import { Material } from "./material.js"
-import { GrafoTest, GrafoTest2 } from "./grafo-escena.js"
+import { GrafoTest, GrafoTest2, GrafoTest3SombrasTextura } from "./grafo-escena.js"
 import { OC_GrafoTest, OC_GrafoTest2 } from "./objeto-comp.js"
 import { ObjetoAnimado, EstadoAnim } from "./objeto-anim.js"
 import { EsferaRotacion } from "./animaciones.js"
@@ -469,6 +469,9 @@ export class AplicacionWeb
                                          await Textura.crear("/imgs/uv-checker-1.png" )))
       this.camaras.push( new CamaraOrbital3D() )
 
+      this.objetos.push( new GrafoTest3SombrasTextura( await Textura.crear("/imgs/bazinga.jpg" ) ) )
+      this.camaras.push( new CamaraOrbital3D() )
+
       this.objetos.push( new OC_GrafoTest( await Textura.crear("/imgs/bazinga.jpg" ) ) )
       this.camaras.push( new CamaraOrbital3D() )
 
@@ -642,7 +645,10 @@ export class AplicacionWeb
 
       let nombres : string[] = []
       for( const objeto of this.objetos )
+      {
+         Log(`${nombref} añadiendo objeto: ${objeto.nombre}`)
          nombres.push( objeto.nombre )
+      }
 
       this.selector_objeto_actual = CrearSelector( this.controles, this.indice_objeto_actual,
                                                         'id_selector_objeto_actual', 'Objeto&nbsp;act.', nombres )

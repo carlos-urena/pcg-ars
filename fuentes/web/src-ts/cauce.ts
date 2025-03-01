@@ -86,9 +86,9 @@ export class Cauce extends CauceBase
     private textura  : Textura | null = null // textura en uso actualmente, (nulo si está desactivado)
 
     // pilas de colores, matrices modelado, materiales y texturas
-    private pila_materiales  : Array<Material> = new Array<Material>
-    private pila_texturas    : Array<Textura | null >  = new Array<Textura | null>
-    protected pila_colores   : Array<Vec3> = new Array<Vec3>
+    private   pila_materiales  : Array<Material> = new Array<Material>
+    private   pila_texturas    : Array<Textura | null >  = new Array<Textura | null>
+    protected pila_colores     : Array<Vec3> = new Array<Vec3>
 
     // locations de los uniforms (cada una de ellas puede ser null)
     private loc_eval_mil           : WebGLUniformLocation | null = null
@@ -107,6 +107,9 @@ export class Cauce extends CauceBase
     private loc_param_s            : WebGLUniformLocation | null = null
     private loc_eval_sombras       : WebGLUniformLocation | null = null
     private loc_mat_vp_sombras     : WebGLUniformLocation | null = null
+
+    private loc_tex         : WebGLUniformLocation | null = null
+    private loc_tex_sombras : WebGLUniformLocation | null = null
 
     
     // ---------------------------------------------------------------------------
@@ -178,6 +181,9 @@ export class Cauce extends CauceBase
         this.loc_eval_sombras      = this.leerLocation( "u_eval_sombras" )
         this.loc_mat_vp_sombras    = this.leerLocation( "u_mat_vp_sombras" )
 
+        this.loc_tex               = this.leerLocation( "u_tex" )
+        this.loc_tex_sombras       = this.leerLocation( "u_tex_sombras" )
+
         gl.uniform1i( this.loc_eval_mil,          b2n( this.eval_mil ) )
         gl.uniform1i( this.loc_usar_normales_tri, b2n( this.usar_normales_tri ) )
         gl.uniform1i( this.loc_eval_text,         b2n( this.eval_text ) )
@@ -196,6 +202,9 @@ export class Cauce extends CauceBase
         gl.uniformMatrix4fv( this.loc_mat_vp_sombras, true, this.mat_vp_sombras )
 
         gl.uniform1i( this.loc_num_luces, 0 ) // por defecto: 0 fuentes de luz activas
+
+        gl.uniform1i( this.loc_tex, 0 ) // la textura se asocia a la unidad 0
+        gl.uniform1i( this.loc_tex_sombras, 1 ) // la textura de sombras se asocia a la unidad 1
         
         // comprobar errores 
         ComprErrorGL( gl, `${nombref} error al final`)

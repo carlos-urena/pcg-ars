@@ -585,6 +585,14 @@ export class CuadradoXZ extends MallaInd
             new Vec3([ -1.0, 0.0, -1.0 ]),  // 3
         ]
 
+        this.coords_text =
+        [
+            new Vec2([  0.0,  1.0  ]),  // 0
+            new Vec2([  1.0,  1.0  ]),  // 1
+            new Vec2([  1.0,  0.0  ]),  // 2
+            new Vec2([  0.0,  0.0  ]),  // 3
+        ]
+
         this.triangulos =
         [
             new UVec3([ 0, 1, 2 ]),

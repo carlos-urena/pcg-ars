@@ -62,15 +62,9 @@ glsl`#version 300 es
     in vec3 nor_wcc;
     in vec4 pos_ndc;
 
-    //out vec4 out_color;      // CUA FBO-SOMBRAS-FLOTANTE
-    out float out_color ;  // CUA FBO-SOMBRAS-FLOTANTE
+    out vec4 out_color ;  // CUA FBO-SOMBRAS-FLOTANTE
 
-    // NO uso esto (NO FUNCIONA)
-    // https://stackoverflow.com/questions/32558579/single-component-texture-with-float
-
-    // Uso mi propia versión:
-    // (aquí abajo)
-
+    
     // Codifica un float 'v' en un vec3 (suponiendo que 'v' 
     // está entre -1 y +1)
 
@@ -104,14 +98,18 @@ glsl`#version 300 es
     
     void main()
     {
-        
-        // FUNCIONA: codifica en RGB CUA FBO-SOMBRAS-FLOTANTE (pero con menos precisión)
-        //vec3  c = codificarEnRGB( pos_ndc.z );
-        //out_color = vec4( c, 1.0 );
-        
-        // FUNCIONA: codifica como una textura flotante, requiere WebGL2 - CUA FBO-SOMBRAS-FLOTANTE
-        float v = 0.5*(1.0+pos_ndc.z) ;  // hay que pasar de [-1,1] a [0,1], igual que al inicio de 'codificarEnRGB'
-        out_color = v ;
+        if ( true )
+        {
+            // codifica como una textura flotante, requiere WebGL2 - CUA FBO-SOMBRAS-FLOTANTE
+            float v = 0.5*(1.0+pos_ndc.z) ;  // hay que pasar de [-1,1] a [0,1], igual que al inicio de 'codificarEnRGB'
+            out_color = vec4( v, 0.0, 0.0, 1.0 ) ; // CUA FBO-SOMBRAS-FLOTANTE (salida vec4)
+        }
+        else
+        {
+            // codifica en RGB CUA FBO-SOMBRAS-FLOTANTE (pero con menos precisión)
+            vec3 c = codificarEnRGB( pos_ndc.z );
+            out_color = vec4( c, 1.0 );
+        }
         
         // des-comentar para comprobar el error (deben verse verdes todos los pixels)
         //float d = decodificarDeRGB( c ) - pos_ndc.z;

@@ -1,9 +1,13 @@
-import { Mat4, CMat4 } from "./vec-mat.js"
+import { Vec3, Mat4, CMat4 } from "./vec-mat.js"
 import { ObjetoVisualizable } from "./objeto-visu.js"
 import { Textura } from "./texturas.js"
 import { Material } from "./material.js"
 import { AplicacionWeb } from "./aplicacion-web.js"
 import { Log } from "./utilidades.js"
+import { ObjetoCompuesto } from "./objeto-comp.js"
+import { CuadradoXZ, CuadradoXYTextura } from "./malla-ind.js"
+import { TrianguloTest, TrianguloIndexadoTest, RejillaXY } from "./utilidades.js"
+import { CuadroXYColores } from "./vaos-vbos.js"
 
 
 /**
@@ -135,10 +139,7 @@ class NodoGrafoEscena extends ObjetoVisualizable
 // -------------------------------------------------------------------------------------------
 
 
-import { Vec3 } from "./vec-mat.js"
-import { TrianguloTest, TrianguloIndexadoTest, RejillaXY } from "./utilidades.js"
-import { CuadroXYColores } from "./vaos-vbos.js"
-import { CuadradoXYTextura } from "./malla-ind.js"
+
 
 
 /**
@@ -197,5 +198,53 @@ export class GrafoTest2 extends NodoGrafoEscena
 
       
    }
+}
+
+// -------------------------------------------------------------------------------------------
+
+/**
+ * Animación sencilla de una esfera que hace circunferencias entorno al origen
+ */
+export class GrafoTest3SombrasTextura extends NodoGrafoEscena 
+{    
+      private radio_circ : number = 0.8 // radio de la circunferencia que hace la esfera
+      private radio_esf  : number = 0.1 // radio de la esfera  
+      //private textura   : Textura
+     /**
+      * Objeto compuesto que tiene la esfera dentro (instanciada con escalado y traslacion en Y)
+      */
+     private nodo_esfera : ObjetoCompuesto
+
+     constructor( p_textura : Textura )
+     {
+          super()
+          this.nombre = "GrafoTest3SombrasTextura"
+          //this.textura = p_textura
+
+          const re = this.radio_esf
+
+          // construir las matrices que le afectarán a la esfera (aparte de la de animación)
+          const mat_traX = CMat4.traslacion( new Vec3([this.radio_circ, 0.0, 0.0])) // 3. trasladar en X una distancia igual al radio de la circunferencia
+          const mat_escR = CMat4.escalado( new Vec3([ re,re,re ]))       // 2. escalar para que tenga el radio 're' en lugar de 1 (=this.radio_esf)
+          const mat_traY = CMat4.traslacion( new Vec3([0.0, 1.0, 0.0]))  // 1. elevar centro en Y una unidad para que la parte inferior sea tangente al rectángulo de la base.
+          const mat_esf  = mat_traX.componer( mat_escR ).componer( mat_traY ) // componer trasl.Y, después escalado, después trasl. X
+          
+          // crear la malla con la esfera y con su transformación (mat_esf)
+          let malla_esfera = new MallaEsfera( 32, 32 )
+          malla_esfera.matrizModelado = mat_esf
+
+          // el nodo de la esfera contiene unicamente la esfera, pero se usa 
+          // para después cambiarle su matriz de modelado con el tiempo
+          this.nodo_esfera = new ObjetoCompuesto         
+          this.nodo_esfera.agregar( malla_esfera )
+
+          // el objeto raiz contiene los dos sub-objetos de la escena: el nodo esfera y el cuadrado de la base.
+          
+          this.agregar( this.nodo_esfera )
+
+          let cuadrado = new CuadradoXZ()
+          cuadrado.textura = p_textura 
+          this.agregar( cuadrado )
+     }
 }
 
