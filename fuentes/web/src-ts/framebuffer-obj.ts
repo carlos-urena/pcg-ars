@@ -60,7 +60,7 @@ export class FramebufferObject
         // Se puede activar el uso de texturas de 32 bits flotantes para el color
         // (para guardar las distancias a las luces en sombras)
         // Pero NO FUNCIONA (por ahora)
-        // this.color_formato_float = true
+        // this.color_formato_float = true // CUA FBO-SOMBRAS-FLOTANTE
 
         if ( this.color_formato_float )
         {
@@ -78,7 +78,7 @@ export class FramebufferObject
             // https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/texImage2D
             // y las combinaciones válidas en esta tabla:
             // https://registry.khronos.org/webgl/specs/latest/2.0/#TEXTURE_TYPES_FORMATS_FROM_DOM_ELEMENTS_TABLE
-            format  = gl.RED
+            format  = gl.RED  // CUA FBO-SOMBRAS-FLOTANTE
             type    = gl.FLOAT
             iFormat = gl.R32F
         }

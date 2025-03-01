@@ -62,8 +62,8 @@ glsl`#version 300 es
     in vec3 nor_wcc;
     in vec4 pos_ndc;
 
-    out vec4 color;
-    //out float color ;  // NO FUNCIONA
+    out vec4 color;      // CUA FBO-SOMBRAS-FLOTANTE
+    //out float color ;  // CUA FBO-SOMBRAS-FLOTANTE
 
     // NO uso esto (NO FUNCIONA)
     // https://stackoverflow.com/questions/32558579/single-component-texture-with-float
@@ -105,11 +105,11 @@ glsl`#version 300 es
     void main()
     {
         
-        // FUNCIONA: codifica en RGB
+        // FUNCIONA: codifica en RGB CUA FBO-SOMBRAS-FLOTANTE
         vec3  c = codificarEnRGB( pos_ndc.z );
         color = vec4( c, 1.0 );
         
-        // NO FUNCIONA 
+        // CUA FBO-SOMBRAS-FLOTANTE
         //float v = 0.5*(1.0+pos_ndc.z) ;
         //color = v ; // vec4( v, v, v, 1.0);  // hay que pasar de [-1,1] a [0,1], igual que al inicio de 'codificarEnRGB'
         
