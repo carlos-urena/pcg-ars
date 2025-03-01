@@ -59,8 +59,8 @@ export class FramebufferObject
         
         // Se puede activar el uso de texturas de 32 bits flotantes para el color
         // (para guardar las distancias a las luces en sombras)
-        // Pero NO FUNCIONA (por ahora)
-        // this.color_formato_float = true // CUA FBO-SOMBRAS-FLOTANTE
+        // FUNCIONA (pero requiere WebGL2)
+        this.color_formato_float = true // CUA FBO-SOMBRAS-FLOTANTE
 
         if ( this.color_formato_float )
         {
@@ -87,7 +87,7 @@ export class FramebufferObject
         this.sizey = sizey 
         this.gl = gl
 
-        const tuple_length = 4 // 3 (when format == gl.RGB)
+        //const tuple_length = 4 // 3 (when format == gl.RGB)
         const level   = 0
         const border  = 0
         const data    = null
@@ -100,6 +100,7 @@ export class FramebufferObject
         
         // fijar el filtrado de forma que no se necesiten mip-maps
         gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST )  
+        gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST )  // faltaba: https://www.reddit.com/r/webgl/comments/wp3p4z/problems_using_internal_formats_other_than_r8_for/?rdt=36417
         gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE )
         gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE )
 
@@ -230,6 +231,9 @@ export class FramebufferObject
         cauce.compMM( mmod )
 
         this.rectXY.visualizar()
+        cauce.fijarEvalText( false, null )
+        cauce.fijarColor( new Vec3([1.0, 1.0, 1.0]) )
+        this.rectXY.visualizarAristas()
     }
 }
 
@@ -252,7 +256,6 @@ class CuadradoXYcct extends MallaInd
         super()
         this.nombre = "Cuadro XY con cc.t."
         
-
         this.posiciones =
         [
             new Vec3([ -1.0, -1.0,  0.0 ]),  // 0

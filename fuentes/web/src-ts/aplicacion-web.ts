@@ -19,7 +19,7 @@ import { GrafoTest, GrafoTest2 } from "./grafo-escena.js"
 import { OC_GrafoTest, OC_GrafoTest2 } from "./objeto-comp.js"
 import { ObjetoAnimado, EstadoAnim } from "./objeto-anim.js"
 import { EsferaRotacion } from "./animaciones.js"
-import { CauceSombras } from "./sombras.js"
+import { CauceSombras } from "./cauce-sombras.js"
 
 // -----------------------------------------------------------------------
 
@@ -1209,12 +1209,16 @@ export class AplicacionWeb
 
       // TEST: visualizar el objeto sobre el fbo de sombras y luego visualizar elfr
 
-      // if ( eval_sombras )
-      // {
-      //    Assert( this.cauce_sombras != null, `${nombref} debería haber un cauce de sombras`)
-      //    this.cauce_sombras.fbo.visualizarEn( cauce, ancho, alto )
-      //    Log(`${nombref} frame ${this.cuenta_frames} visualizado recuadrito.`)
-      // }
+      const mostrar_fbo_sombras : Boolean = true  
+
+      if ( eval_sombras && mostrar_fbo_sombras )
+      {
+         Assert( this.cauce_sombras != null, `${nombref} debería haber un cauce de sombras`)
+         //Log(`######### ${nombref} ${this.cuenta_frames} inicio visualización FBO de sombras`)
+         this.cauce_sombras.fbo.visualizarEn( cauce, ancho, alto )
+         //Log(`######### ${nombref}  ${this.cuenta_frames} fin visualización FBO de sombras`)
+         Log(``)
+      }
 
       ComprErrorGL( gl, `${nombref} al final`)
 

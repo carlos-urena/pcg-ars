@@ -183,12 +183,14 @@ float FactorSombraArrojada()
    for( int j = 0 ; j < ns_root ; j++ )
    {
       // FUNCIONA: usar texelFetch con un sampler de 3 canales RGB
-      vec4 rgb = texelFetch( u_tex_sombras, csi + ivec2( i-c, j-c ), 0 ) ;
-      float z = DecodificarDeRGB( rgb.rgb ) ;
+      //vec4 rgb = texelFetch( u_tex_sombras, csi + ivec2( i-c, j-c ), 0 ) ;  // CUA FBO-SOMBRAS-FLOTANTE
+      //float z = DecodificarDeRGB( rgb.rgb ) ; 
       
-      // NO FUNCIONA: usar texelFetch con un sampler de 1 canal float 32
-      //vec4  zfetch = texelFetch( u_tex_sombras, csi + ivec2( i-c, j-c ), 0 ) ;
-      //float z = zfetch.b ; // si se usa sombras con opción de 1 canal float 32, no es necesario decodificar ?? 
+      // FUNCIONA: usar texelFetch y obtener un vec4 que solo tiene un valor en el canal R
+      // https://www.reddit.com/r/webgl/comments/wp3p4z/problems_using_internal_formats_other_than_r8_for/?rdt=36417
+      vec4  zfetch = texelFetch( u_tex_sombras, csi + ivec2( i-c, j-c ), 0 ) ;
+      float v = (2.0*zfetch.r)-1.0;  // pasa de [0..1] y [-1..1], igual que al final de de DecodificarDeRGB
+      float z = v ; // si se usa sombras con opción de 1 canal float 32, no es necesario decodificar ?? // CUA FBO-SOMBRAS-FLOTANTE
       
       if ( posic_fcc.z > z+0.01 )
          suma += 1.0 ;
