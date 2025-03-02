@@ -57,10 +57,10 @@ export class FramebufferObject
         let type    : number = gl.UNSIGNED_BYTE
         let iFormat : number = gl.RGBA
         
-        // Se puede activar el uso de texturas de 32 bits flotantes para el color
-        // (para guardar las distancias a las luces en sombras)
-        // FUNCIONA (pero requiere WebGL2)
-        this.color_formato_float = true // CUA FBO-SOMBRAS-FLOTANTE
+        // Se activa, por defecto, el uso de una textura con un 'float' por piel
+        // Requiere que el contexto sea WebGL2
+
+        this.color_formato_float = true 
 
         if ( this.color_formato_float )
         {
@@ -74,7 +74,7 @@ export class FramebufferObject
             if ( color_ext == null )
                 throw new Error(`${fname} no se ha podido activar la extensión 'EXT_color_buffer_float' (para framebuffers de 32 bits flotantes)`)
 
-            // var las opciones de 'format', 'type' e 'iFormat' aquí: 
+            // Ver las opciones de 'format', 'type' e 'iFormat' aquí: 
             // https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/texImage2D
             // y las combinaciones válidas en esta tabla:
             // https://registry.khronos.org/webgl/specs/latest/2.0/#TEXTURE_TYPES_FORMATS_FROM_DOM_ELEMENTS_TABLE

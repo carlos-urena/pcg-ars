@@ -62,11 +62,13 @@ glsl`#version 300 es
     in vec3 nor_wcc;
     in vec4 pos_ndc;
 
-    out vec4 out_color ;  // CUA FBO-SOMBRAS-FLOTANTE
+    out vec4 out_color ;  // Se codifica la Z en RGB, o bien se rescribe un float en el canal R
 
     
     // Codifica un float 'v' en un vec3 (suponiendo que 'v' 
-    // está entre -1 y +1)
+    // está entre -1 y +1). En primer lugar pasa el valor a [0,1],
+    // Después se escriben en los componentes R, G y B tres valores entre 0 y 1,
+    // cada uno de ellos con exactamente 8 bits de información.
 
     vec3 codificarEnRGB( float v )
     {
@@ -96,17 +98,20 @@ glsl`#version 300 es
         return 2.0*x-1.0;
     }
     
+    // Escribe la componente de Z de las coordenadas NDC del fragmento 
+    // (normalizadas entre 0 y 1)
+
     void main()
     {
         if ( true )
         {
-            // codifica como una textura flotante, requiere WebGL2 - CUA FBO-SOMBRAS-FLOTANTE
+            // Escribe la Z en la componente de rojo de la salida.
             float v = 0.5*(1.0+pos_ndc.z) ;  // hay que pasar de [-1,1] a [0,1], igual que al inicio de 'codificarEnRGB'
-            out_color = vec4( v, 0.0, 0.0, 1.0 ) ; // CUA FBO-SOMBRAS-FLOTANTE (salida vec4)
+            out_color = vec4( v, 0.0, 0.0, 1.0 ) ; 
         }
         else
         {
-            // codifica en RGB CUA FBO-SOMBRAS-FLOTANTE (pero con menos precisión)
+            // Codifica la Z como un 'vec3', cada componente (R,G y B) es un float entre 0 y 1, con 8 bits de información.
             vec3 c = codificarEnRGB( pos_ndc.z );
             out_color = vec4( c, 1.0 );
         }

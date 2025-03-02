@@ -143,6 +143,11 @@ export class AplicacionWeb
    private visualizar_ejes : boolean = true
 
    /**
+    * True si queremos visualizar el FBO usado para sombras arrojadas 
+    */
+   private visualizar_fbo_sombras : boolean = false
+
+   /**
     * Elemento HTML de tipo 'input' (checkbox) para el botón de visualizar ejes si/no
     */
    private input_boton_ejes : HTMLInputElement | null = null
@@ -182,6 +187,11 @@ export class AplicacionWeb
     * Elemento HTML de tipo 'input' (checkbox) para el botón de activar/desactivar sombras arrojadas
     */
    private input_boton_sombras_arrojadas : HTMLInputElement | null = null
+
+   /**
+    * Elemento HTML de tipo 'input' (checkbox) para el botón de activar/desactivar sombras arrojadas
+    */
+   private input_boton_visualizar_fbo_sombras : HTMLInputElement | null = null
 
    /**
     * Indica si las sombras arrojadas  están activadas o no 
@@ -636,6 +646,19 @@ export class AplicacionWeb
    // ------------------------------------------------------------------------- 
 
    /**
+    * Crea el check box para activar/desactivar la visualización del FBO de sombras arrojadas
+    */
+   private crearCheckboxVisuFBOSombras()
+   {
+      const nombref : string = 'AplicacionWeb.crearCheckboxVisuFBOSombras'
+
+      this.input_boton_visualizar_fbo_sombras = CrearInputCheckbox( this.controles, this.visualizar_fbo_sombras,
+                                       'id_boton_visualizar_fbo_sombras', 'Visu. FBO sombras' )
+      this.input_boton_visualizar_fbo_sombras.onclick = () => this.fijarVisuFBOSombras( ! this.visualizar_fbo_sombras )
+   }
+   // ------------------------------------------------------------------------- 
+
+   /**
     * Crear un selector para el objeto actual (asigna a 'this.selector_objeto_actual')
     */
    private crearSelectorObjetoActual() : void
@@ -906,6 +929,7 @@ export class AplicacionWeb
       this.crearCheckboxNormales()
       this.crearCheckboxIluminacion()
       this.crearCheckboxSombrasArrojadas()
+      this.crearCheckboxVisuFBOSombras()
       this.crearSelectorObjetoActual()
       this.crearInputColorDefecto()
       this.crearSlidersDirLuz()
@@ -1213,17 +1237,14 @@ export class AplicacionWeb
          cauce.popColor()
       }
 
-      // TEST: visualizar el objeto sobre el fbo de sombras y luego visualizar elfr
+      // Visualizar el objeto sobre el fbo de sombras y luego visualizar elfr
 
-      const mostrar_fbo_sombras : Boolean = true  
-
-      if ( eval_sombras && mostrar_fbo_sombras )
+      if ( eval_sombras && this.visualizar_fbo_sombras )
       {
          Assert( this.cauce_sombras != null, `${nombref} debería haber un cauce de sombras`)
          //Log(`######### ${nombref} ${this.cuenta_frames} inicio visualización FBO de sombras`)
          this.cauce_sombras.fbo.visualizarEn( cauce, ancho, alto )
          //Log(`######### ${nombref}  ${this.cuenta_frames} fin visualización FBO de sombras`)
-         Log(``)
       }
 
       ComprErrorGL( gl, `${nombref} al final`)
@@ -1438,6 +1459,24 @@ export class AplicacionWeb
       if ( this.input_boton_sombras_arrojadas != null )
          this.input_boton_sombras_arrojadas.checked = this.evaluar_sombras
       const msg : string = `Sombras arrojadas: ${this.evaluar_sombras ? "activada" : "desactivada"}`
+      this.estado = msg 
+      window.requestAnimationFrame( VisualizarFrameAplicacionWeb )
+   }
+   // ------------------------------------------------------------------------------------
+   
+   /**
+    * Activa o desactiva la visualización del FBO de sombras arrojadas
+    * 
+    * @param nuevo_visualizar_fbo_sombras (boolean) true para activar, false para desactivar 
+    */
+   fijarVisuFBOSombras( nuevo_visualizar_fbo_sombras : boolean  ) : void 
+   {
+      const nombref = 'AplicacionWeb.fijarVisuFBOSombras'
+      this.visualizar_fbo_sombras = nuevo_visualizar_fbo_sombras
+
+      if ( this.input_boton_visualizar_fbo_sombras != null )
+         this.input_boton_visualizar_fbo_sombras.checked = this.visualizar_fbo_sombras
+      const msg : string = `Visualizar FBO de sombras arrojadas: ${this.visualizar_fbo_sombras ? "activado" : "desactivado"}`
       this.estado = msg 
       window.requestAnimationFrame( VisualizarFrameAplicacionWeb )
    }
