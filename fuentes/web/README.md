@@ -71,9 +71,10 @@ cd scripts
 ./comp-lanzar.sh
 ``` 
 
-Esto compila los fuentes Typescript (que necesiten recompilarse), y genera los fuentes Javascript. Si no ha habido errores al compilar, lanza un servidor Web local que hace accesible la aplicación Web en la URL que aparece en el terminal, es una de estas:
+Esto compila los fuentes Typescript (que necesiten recompilarse), y genera los fuentes Javascript. Si no ha habido errores al compilar, lanza un servidor Web local que hace accesible la aplicación Web desde cualquier navegador que se esté ejecutando en el mismo equipo. Se debe usar una de estas dos URLs:
 
-`http://0.0.0.0:8000` o bien `http://localhost:8000`
+   - `http://localhost:8000`
+   - `http://0.0.0.0:8000` 
 
 ### Windows
 
@@ -86,4 +87,6 @@ cd scripts
 
 La primera vez habrá que dar permisos al interprete de Python para que use la red (aunque sea localmente) para recibir peticiones y devolver la respuesta. 
 
-Para probar la aplicación, usar la URL `http://localhost:8000` en cualquier navegador del equipo.
+Para probar la aplicación, se debe ejecutar cualquier navegador moderno en el mismo equipo en el que se ha lanzado el servidor, se debe usar la URL 
+
+  - `http://localhost:8000` 
