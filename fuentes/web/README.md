@@ -30,13 +30,13 @@ npm install -g typescript
 
 ### macOS
 
-Es necesario instalar _Node_, se puede hacer con el gestor de paquetes _Brew_ (), con la orden: 
+Es necesario instalar _Node_, se puede hacer con el gestor de paquetes _Brew_ ([brew.sh](https://brew.sh)), con la orden: 
 
 ```
 brew install node
 ```
 
-o bien descargarlo e instalarlo: https://nodejs.org/en/download. Una vez instalado, se dispone de la orden `npm`, la usamos para instalar el compilador de _typescript_, así:
+o bien descargarlo e instalarlo: [nodejs.org/en/download](https://nodejs.org/en/download). Una vez instalado, se dispone de la orden `npm`, la usamos para instalar el compilador de _typescript_, así:
 
 ```
 npm install -g typescript
@@ -71,9 +71,9 @@ cd scripts
 ./comp-lanzar.sh
 ``` 
 
-Esto compila los fuentes Typescript (que necesiten recompilarse), y genera los fuentes Javascript. Si no ha habido errores al compilar, lanza un servidor Web local que hace accesible la aplicación Web en la URL que aparece en el terminal, es esta:
+Esto compila los fuentes Typescript (que necesiten recompilarse), y genera los fuentes Javascript. Si no ha habido errores al compilar, lanza un servidor Web local que hace accesible la aplicación Web en la URL que aparece en el terminal, es una de estas:
 
-`http://0.0.0.0:8000`
+`http://0.0.0.0:8000` o bien `http://localhost:8000`
 
 ### Windows
 
