@@ -14,13 +14,25 @@ Prerequisitos e instrucciones de compilación y ejecución para la aplicación W
 
 El compilador de _typescript_ se puede instalar con el gestor de paquetes de _Node Package Manager_ (NPM: [npmjs.com](https://www.npmjs.com/)). Para instalar NPM, se puede instalar antes la utilidad _Node Version Manager_ (NVM).
 
-Se puede instalar NVM con `wget` según se dice en el repo: https://github.com/nvm-sh/nvm#installing-and-updating. Abrimos una nueva terminal y en ella hacer:
+Se puede instalar NVM con `wget` según se dice en el repo: https://github.com/nvm-sh/nvm#installing-and-updating. Para comprobar la instalación, podemos ejecutar la orden 
+
+```
+nvm -v
+```
+
+y así verificar que tenemos instalado `nvm` y saber su versión. Una vez esta herramienta está disponible, la usamos para instalar NPM (_node package manager_), con la orden:
 
 ```
 nvm install 18
 ```
 
-Ahora está disponible la orden `npm` (_node package manager_), y la usamos para instalar el paquete que tiene el compilador de _typescript_ ([www.npmjs.com/package/typescript](https://www.npmjs.com/package/typescript)), así: 
+Podemos comprobar que la instalación ha ido bien ejecutando 
+
+```
+npm -v
+```
+
+Una vez que sabemos que está disponible la orden `npm` , la usamos para instalar el paquete que tiene el compilador de _typescript_ ([www.npmjs.com/package/typescript](https://www.npmjs.com/package/typescript)), así: 
 
 ```
 npm install -g typescript
