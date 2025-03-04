@@ -137,12 +137,12 @@ export class FPColumna extends FuncionParam
       Assert( 0.0 <= st.t && st.t <= 1.0, `valor 't' fuera de rango` )
 
       const 
-            a  : number = Math.PI * (2.0*st.s),
+            a  : number = Math.PI * (2.0*st.t),
             ca : number = Math.cos( a ),
             sa : number = Math.sin( a ),
-            r  : number = 1.0+0.1*Math.sin( 5.0* (a + 2.0*Math.PI*st.t) )
+            r  : number = 1.0+0.1*Math.sin( 5.0* (a + 2.0*Math.PI*st.s) )
 
-      return new Vec3([ r*ca, 10.0*(st.t-0.5), r*sa ])
+      return new Vec3([ r*ca, 10.0*(st.s-0.5), r*sa ])
    }
 }
 
@@ -196,7 +196,8 @@ export class FPCampoAlturas extends FuncionParam
       {
          const d = 20.0*st.menos( p ).longitud
          h += 0.5/(1.0 + d*d*d)
+         //h += 0.05*Math.cos( d*2.0 )
       }
-      return new Vec3([ st[0], h, st[1] ])
+      return new Vec3([ st[1], h, st[0] ])
    }
 }
