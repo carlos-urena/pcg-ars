@@ -3,6 +3,7 @@
 precision highp float ; // --> funciona con colores RGB codificados
 precision highp int ;
 
+
 // *********************************************************************
 //
 // fragment shader sencillo
