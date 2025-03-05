@@ -7,6 +7,17 @@ Prerequisitos e instrucciones de compilación y ejecución para la aplicación W
 + Intérprete de *python3* para lanzar el servidor
 + Compilador de *typescript* para compilar fuentes
 
+## Instalación del intérprete de _Pyhton_
+
+Si no tienes instalado el intérprete de Python (versión 3 como mínimo), puedes instalarlo descargando la versión para tu sistema operativo (Linux, macOs o Windows) de la página oficial:
+
+[www.python.org/downloads](https://www.python.org/downloads/)
+
+Una vez instalado, puedes comprobar que funciona correctamente viendo la versión instalada, con la orden:
+
+```
+python3 --version 
+```
 
 ## Instalación del compilador de _Typescript_
 
