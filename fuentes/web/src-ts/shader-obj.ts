@@ -1,4 +1,4 @@
-import { Assert, ComprErrorGL, LeerArchivoTexto, Log, ContextoWebGL } from "./utilidades.js"
+import { Assert, ComprErrorGL, Log, ContextoWebGL, LeerArchivoGLSL } from "./utilidades.js"
 
 
 /**
@@ -74,18 +74,18 @@ export class ShaderObject
     // --------------------------------------------------------------------------------------------
 
     /**
-     * Crea un shader a partir de una URL
+     * Crea un shader a partir de un nombre d eun archivo GLSL en el sevidor
      * @param gl  contexto WebGL
      * @param tipo_shader  gl.VERTEX_SHADER o gl.FRAGMENT_SHADER
-     * @param url_fuente  URL del archivo que contiene el fuente del shader
+     * @param nombre string con el nombre del archivo que contiene el fuente del shader (en la sub-carpeta 'glsl', hermana de 'index.html')
      * @returns 
      */
-    public static async crearDesdeURL( gl : ContextoWebGL, tipo_shader : GLenum, url_fuente : string ) : Promise<ShaderObject>
+    public static async crearDesdeArchivoGLSL( gl : ContextoWebGL, tipo_shader : GLenum, nombre : string ) : Promise<ShaderObject>
     {
         const nombref : string = "ShaderObject.crearDesdeURL:"
 
-        let shader = new ShaderObject( gl, tipo_shader, url_fuente, null )
-        await shader.leerFuenteDesdeURL()
+        let shader = new ShaderObject( gl, tipo_shader, nombre, null )
+        await shader.leerFuenteDesdeArchivoGLSL()
         return shader
     }
     // --------------------------------------------------------------------------------------------
@@ -109,16 +109,17 @@ export class ShaderObject
     // --------------------------------------------------------------------------------------------
 
     /**
-     * Lee el texto fuente de un shader a partir de una URL y lo guarda en la variable de instancia
+     * Lee el texto fuente de un shader a partir de un nombre un archivo GLSL (en la carpeta 'glsl', 
+     * hermana de 'index.html') y lo guarda en la variable de instancia
      */
-    private async leerFuenteDesdeURL() : Promise<void>
+    private async leerFuenteDesdeArchivoGLSL() : Promise<void>
     {
         const nombref : string = "ShaderObject.leerFuenteDesdeURL:"
 
         Assert( this.url_fuente != "", `${nombref} 'url_fuente' no puede ser vacío`)
         Assert( this.texto_fuente == "", `${nombref} 'texto_fuente' debe ser vacío`)
 
-        this.texto_fuente = await LeerArchivoTexto( this.url_fuente )
+        this.texto_fuente = await LeerArchivoGLSL( this.url_fuente )
     }
 
     // --------------------------------------------------------------------------------------------

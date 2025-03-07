@@ -257,7 +257,7 @@ export function NumbDesdeHex2( h2 : string ) : number
  */
 export async function LeerArchivoTexto( url_arch : string ) : Promise<string>
 { 
-   const nombref : string = 'LeerArchivoTexto:' 
+   const nombref : string = `LeerArchivoTexto("${url_arch}")`
 
    // obtener una promesa ('Response') que se resuelve cuando se lee un archivo de la red o el disco.
    let response : Response = await fetch( url_arch )
@@ -272,6 +272,24 @@ export async function LeerArchivoTexto( url_arch : string ) : Promise<string>
    return texto
 } 
 
+// -----------------------------------------------------------------------------
+
+
+
+/**
+ * Leer un archivo en un servidor, esperar a que se cargue entero y devolver el 
+ * contenido como una promesa con una cadena de texto dentro
+ * 
+ * @param nombre cadena con el nombre del archivo glsl
+ * @returns (string) cadena codificada en UTF8
+ */
+export async function LeerArchivoGLSL(  nombre : string ) : Promise<string>
+{ 
+   const nombref : string = `LeerArchivoGLSL("${nombre}"):`
+   let url_arch : string = `glsl/${nombre}`
+
+   return LeerArchivoTexto( url_arch )
+} 
 // -------------------------------------------------------------------------------------
 
 /**
@@ -279,12 +297,14 @@ export async function LeerArchivoTexto( url_arch : string ) : Promise<string>
  * https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
  * (sección: Supplying your own Request Object)
  * 
- * @param url_string (string) URL del archivo de imagen 
+ * @param nombre_arch (string) nombre del archivo de imagen (en la carpeta 'imgs', hermana de 'index.html')
  * @returns (HTMLImageElement) elemento imagen
  */
-export async function LeerArchivoImagen( url_string : string ) : Promise<HTMLImageElement>
+export async function LeerArchivoImagen( nombre_arch : string ) : Promise<HTMLImageElement>
 {
    const nombref : string = 'LeerArchivoImagen:' 
+
+   let url_string = `imgs/${nombre_arch}`
    
    // obtener una promesa ('Response') que se resuelve cuando se lee un archivo de la red o el disco.
    let response : Response = await fetch( url_string )

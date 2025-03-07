@@ -1,6 +1,6 @@
 
 
-import  { Assert, ComprErrorGL, LeerArchivoTexto, Log,
+import  { Assert, ComprErrorGL, Log,
          CrearFloat32ArrayV2, CrearFloat32ArrayV3, CrearFloat32ArrayV4, 
          ContextoWebGL} 
 from    "./utilidades.js"
@@ -237,8 +237,8 @@ export class Cauce extends CauceBase
         Assert( this.objeto_programa == null, `${nombref}  el objeto programa no es nulo` )
 
         // Leer los fuentes GLSL
-        let fs : ShaderObject = await ShaderObject.crearDesdeURL( gl, gl.FRAGMENT_SHADER, "/glsl/cauce_3_00_fragment_shader.glsl" )
-        let vs : ShaderObject   = await ShaderObject.crearDesdeURL( gl, gl.VERTEX_SHADER, "/glsl/cauce_3_00_vertex_shader.glsl" )
+        let fs : ShaderObject = await ShaderObject.crearDesdeArchivoGLSL( gl, gl.FRAGMENT_SHADER, "cauce_3_00_fragment_shader.glsl" )
+        let vs : ShaderObject = await ShaderObject.crearDesdeArchivoGLSL( gl, gl.VERTEX_SHADER, "cauce_3_00_vertex_shader.glsl" )
 
         Log(`${nombref} compilados.`)
 

@@ -471,26 +471,26 @@ export class AplicacionWeb
       this.objetos.push( new MallaCampoAlturas( 512, 512 ) )
       this.camaras.push( new CamaraOrbital3D() )
 
-      this.objetos.push( new GrafoTest( await Textura.crear("/imgs/bazinga.jpg" ) ) )
+      this.objetos.push( new GrafoTest( await Textura.crear("bazinga.jpg" ) ) )
       this.camaras.push( new CamaraOrbital3D() )
 
-      this.objetos.push( new GrafoTest2( await Textura.crear("/imgs/uv-checker-1.png" ),
-                                         await Textura.crear("/imgs/uv-checker-2.png" ),
-                                         await Textura.crear("/imgs/uv-checker-1.png" )))
+      this.objetos.push( new GrafoTest2( await Textura.crear("uv-checker-1.png" ),
+                                         await Textura.crear("uv-checker-2.png" ),
+                                         await Textura.crear("uv-checker-1.png" )))
       this.camaras.push( new CamaraOrbital3D() )
 
-      this.objetos.push( new GrafoTest3SombrasTextura( await Textura.crear("/imgs/bazinga.jpg" ) ) )
+      this.objetos.push( new GrafoTest3SombrasTextura( await Textura.crear("bazinga.jpg" ) ) )
       this.camaras.push( new CamaraOrbital3D() )
 
-      this.objetos.push( new OC_GrafoTest( await Textura.crear("/imgs/bazinga.jpg" ) ) )
+      this.objetos.push( new OC_GrafoTest( await Textura.crear("bazinga.jpg" ) ) )
       this.camaras.push( new CamaraOrbital3D() )
 
-      this.objetos.push( new OC_GrafoTest2( await Textura.crear("/imgs/uv-checker-1.png" ),
-                                         await Textura.crear("/imgs/uv-checker-2.png" ),
-                                         await Textura.crear("/imgs/uv-checker-1.png" )))
+      this.objetos.push( new OC_GrafoTest2( await Textura.crear("uv-checker-1.png" ),
+                                         await Textura.crear("uv-checker-2.png" ),
+                                         await Textura.crear("uv-checker-1.png" )))
       this.camaras.push( new CamaraOrbital3D() )
 
-      this.objetos.push( new CuadradoXYTextura( await Textura.crear("/imgs/bazinga.jpg" )))
+      this.objetos.push( new CuadradoXYTextura( await Textura.crear("bazinga.jpg" )))
       this.camaras.push( new CamaraOrbital3D() )
 
       this.objetos.push( await MallaPLY.crear( "/plys/beethoven.ply" ) )
