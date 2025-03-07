@@ -493,13 +493,13 @@ export class AplicacionWeb
       this.objetos.push( new CuadradoXYTextura( await Textura.crear("bazinga.jpg" )))
       this.camaras.push( new CamaraOrbital3D() )
 
-      this.objetos.push( await MallaPLY.crear( "/plys/beethoven.ply" ) )
+      this.objetos.push( await MallaPLY.crear( "beethoven.ply" ) )
       this.camaras.push( new CamaraOrbital3D() )
 
-      this.objetos.push( await MallaPLY.crear( "/plys/big_dodge.ply" ) )
+      this.objetos.push( await MallaPLY.crear( "big_dodge.ply" ) )
       this.camaras.push( new CamaraOrbital3D() )
 
-      this.objetos.push( await MallaPLY.crear( "/plys/ant.ply" ) )
+      this.objetos.push( await MallaPLY.crear( "ant.ply" ) )
       this.camaras.push( new CamaraOrbital3D() )
 
     

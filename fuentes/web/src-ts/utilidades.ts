@@ -274,19 +274,33 @@ export async function LeerArchivoTexto( url_arch : string ) : Promise<string>
 
 // -----------------------------------------------------------------------------
 
-
-
 /**
- * Leer un archivo en un servidor, esperar a que se cargue entero y devolver el 
+ * Leer un archivo GLSL en el servidor, esperar a que se cargue entero y devolver el 
  * contenido como una promesa con una cadena de texto dentro
  * 
- * @param nombre cadena con el nombre del archivo glsl
+ * @param nombre cadena con el nombre del archivo glsl (en la carpeta 'glsl', hermana de 'index.html')
  * @returns (string) cadena codificada en UTF8
  */
 export async function LeerArchivoGLSL(  nombre : string ) : Promise<string>
 { 
    const nombref : string = `LeerArchivoGLSL("${nombre}"):`
    let url_arch : string = `glsl/${nombre}`
+
+   return LeerArchivoTexto( url_arch )
+} 
+// -------------------------------------------------------------------------------------
+
+/**
+ * Leer un archivo GLSL en el servidor, esperar a que se cargue entero y devolver el 
+ * contenido como una promesa con una cadena de texto dentro
+ * 
+ * @param nombre cadena con el nombre del archivo glsl (en la carpeta 'plys', hermana de 'index.html')
+ * @returns (string) cadena codificada en UTF8
+ */
+export async function LeerArchivoPLY(  nombre : string ) : Promise<string>
+{ 
+   const nombref : string = `LeerArchivoPLY("${nombre}"):`
+   let url_arch : string = `plys/${nombre}`
 
    return LeerArchivoTexto( url_arch )
 } 

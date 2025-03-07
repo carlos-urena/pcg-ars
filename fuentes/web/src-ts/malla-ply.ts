@@ -1,5 +1,5 @@
 
-import { Log, Assert, LeerArchivoTexto } from "./utilidades.js"
+import { Log, Assert, LeerArchivoPLY } from "./utilidades.js"
 
 import { MallaInd } from "./malla-ind.js"
 import { Vec3, UVec3 } from "./vec-mat.js"
@@ -7,24 +7,25 @@ import { Vec3, UVec3 } from "./vec-mat.js"
 export class MallaPLY extends MallaInd 
 {
    
-   private url  : string = ""
+   private nombre_arch  : string = ""
    
    /**
     *  Crea una instancia de MallaPLY, pero no está inicializada todavía
     *  (lo estará después de llamar a 'leer')
+    *  El 'nombre_arch' debe ser un archivo en el servidor, en la carpeta 'plys', hermana de 'index.html'
     */
-   constructor( url : string  ) 
+   constructor( p_nombre_arch : string  ) 
    {
-      const nombref : string = 'MallaPLY.constructor:'
+      const nombref : string = `MallaPLY.constructor(${p_nombre_arch}):`
       super() 
 
-      Assert( url != "" , `${nombref} la url está vacía`)
-      this.url = url  
+      Assert( p_nombre_arch != "" , `${nombref} la url está vacía`)
+      this.nombre_arch = p_nombre_arch  
       
       // obtener el nombre del archivo a partir del nombre completo con carpetas
-      const nombre_archivo : string = (((url.split('\\').pop())!.split('/'))!.pop())!
+      const nombre_archivo : string = (((p_nombre_arch.split('\\').pop())!.split('/'))!.pop())!
 
-      this.nombre = `${nombre_archivo}`
+      this.nombre = nombre_archivo 
    }
    // -------------------------------------------------------------------------------
    
@@ -36,12 +37,12 @@ export class MallaPLY extends MallaInd
    public async leer() : Promise<void> 
    {
       const nombref : string = 'MallaPLY.leer:'
-      const info : string = `${nombref} leyendo ply '${this.url}' : `
+      const info : string = `${nombref} leyendo ply '${this.nombre_arch}' : `
 
       Assert( this.posiciones.length == 0, `${info} la tabla de posiciones de vértices no estaba vacía`)
       Assert( this.triangulos.length == 0, `${info} la tabla de triángulos no estaba vacía`)
 
-      const texto_ply_bruto : string = await LeerArchivoTexto( this.url )
+      const texto_ply_bruto : string = await LeerArchivoPLY( this.nombre_arch )
       const lineas          : Array<string> = texto_ply_bruto.split(/\r?\n/)
       
       let nl     : number = 0  // número de línea que se va a procesar  
