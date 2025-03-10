@@ -346,7 +346,12 @@ class AplicacionPCG( p_gls_view: GLSurfaceViewPCG )
         alto_vp  = nuevo_alto
         ancho_vp = nuevo_ancho
     }
-    // ----
+    // ---------------------------------------------------------------------------------------------
+
+    /**
+     * Método gestor del evento de pulsacion larga (pulsar y dejar pulsado un poco antes de levantar)
+     * Actualiza el objeto actual de la escena, pasa al siguiente objeto.
+     */
     fun mgeLongPress( me : MotionEvent)
     {
         val TAGF = "[${object {}.javaClass.enclosingMethod?.name?:nfnd}]"
