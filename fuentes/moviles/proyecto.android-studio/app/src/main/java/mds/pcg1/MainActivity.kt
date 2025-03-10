@@ -26,7 +26,14 @@ package mds.pcg1
 
 import android.os.Bundle
 import android.app.Activity
+import android.util.Log
+import android.view.Gravity
+import android.view.View
+import android.widget.Button
+import android.widget.LinearLayout
 import mds.pcg1.gls_view.*
+
+
 
 /**
  * Notas sobre aspectos de esta aplicación:
@@ -73,6 +80,36 @@ class OpenGLES30Activity : Activity()
         gl_view = GLSurfaceViewPCG( this )
         setContentView( gl_view )
 
+        // añadir widgets (WIP)
+        anadirWidgets()
+    }
+    // ---------------------------------------------------------------------------------------
+
+    /**
+     * Funcicon que aniade widgets de pruebas
+     */
+    private fun anadirWidgets() {
+
+        // crear un 'view' tipo 'botón' y configurarla
+        val button = Button(this) ;
+        button.text = "Menú"
+        button.setOnClickListener{ showPopupMenu(it) }
+
+        // anadir boton como "contenido" adicional en esta actividad.
+        val lp =  LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        lp.gravity = Gravity.TOP or Gravity.END
+        addContentView( button, lp )
+    }
+
+    private fun showPopupMenu(anchor: View?) {
+        val TAGF : String = "[OpenGLES30Activity.showPopupMenu]"
+        Log.v( TAGF, "** menú pulsado **")
+        // val menuView = layoutInflater.inflate(R.layout.menu_layout, null)  // --> da error y AS propone crear el XML del men
+        //popupWindow = PopupWindow(menuView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, true)
+        //popupWindow.showAsDropDown(anchor)
     }
 
     companion object {
