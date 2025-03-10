@@ -237,7 +237,7 @@ List of devices attached
 38091FDJG00CU2         device usb:3-4 product:husky model:Pixel_8_Pro device:husky transport_id:1
 ```
 
-Podemos listar todos los _packages_ instalados en el dispositivo, para eso usamos la sub-orden 'pm' (_package manager_) de ADB:
+Ahora podemos listar todos los _packages_ instalados en el dispositivo, para eso usamos la sub-orden `pm` (_package manager_) de ADB:
 
 ```
 adb shell pm list packages 
@@ -278,6 +278,12 @@ En la salida debe aparecer una linea con `uid=N`, donde _N_ es un número identi
 
 ```
 adb shell dumpsys package mds.pcg1 | grep uid
+```
+
+A modo de ejemplo, esta última orden produce una salida como esta: 
+
+```
+uid=10294 gids=[] type=0 prot=signature
 ```
 
 Hay que tener en cuenta que cada vez que se recompila la aplicación (y se vuelve a instalar el APK en el dispositivo, con `gradlew installDebug`), este número cambiará.
