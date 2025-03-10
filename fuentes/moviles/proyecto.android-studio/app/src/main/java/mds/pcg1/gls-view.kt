@@ -29,7 +29,6 @@ import android.content.Context
 import android.opengl.*
 import android.os.Build
 import android.util.Log
-import android.view.GestureDetector
 import android.view.GestureDetector.OnDoubleTapListener
 import android.view.GestureDetector.OnGestureListener
 import android.view.MotionEvent
@@ -68,9 +67,10 @@ class GLSurfaceViewPCG( p_context: Context ) :
     OnDoubleTapListener,
     GLSurfaceView( p_context )
 {
-    private val renderer  : RendererPCG
-    private var og_escala  : ScaleGListener       // observador de gestos de escala
-    private var dg_escala : ScaleGestureDetector // detector de gestos de escala
+    private val renderer  : RendererPCG           // renderer
+    private var og_escala : ScaleGListener        // observador de gestos de escala
+    private var dg_escala : ScaleGestureDetector  // detector de gestos de escala
+    private var dg_varios : GestureDetectorCompat // detector de gestos varios
 
     // variable de estado usada para evitar eventos de movimiento que se generan
     // después de acabado un evento de escala, por no levantar los dos dedos a la vez.
@@ -83,11 +83,11 @@ class GLSurfaceViewPCG( p_context: Context ) :
 
 
     // ¿ detector de eventos varios ?
-    private var mDetector: GestureDetectorCompat
+
 
     companion object
     {
-        var contador_eventos : Int = 0
+        var contador_eventos : Int = 0 // contador de eventos, es solo para depuración
     }
 
     init {
@@ -112,8 +112,8 @@ class GLSurfaceViewPCG( p_context: Context ) :
         dg_escala  = ScaleGestureDetector( context, og_escala )
 
         // asociar el detector de gestos variados con esta vista
-        mDetector = GestureDetectorCompat(context, this)
-        mDetector.setOnDoubleTapListener(this) // poner el detector como observador de gestos de double tap
+        dg_varios = GestureDetectorCompat(context, this)
+        dg_varios.setOnDoubleTapListener(this) // poner el detector como observador de gestos de double tap
 
 
     }
@@ -130,7 +130,7 @@ class GLSurfaceViewPCG( p_context: Context ) :
 
         //Log.v(TAGF,"$TAGF (inicio evento $contador_eventos) action string == ${da}")
 
-        mDetector.onTouchEvent( me ) // analiza los eventos touch....¿?
+        dg_varios.onTouchEvent( me ) // analiza los eventos touch....¿?
 
         dg_escala.onTouchEvent( me )  // detecta gesto de escala y actualiza su estado
 
