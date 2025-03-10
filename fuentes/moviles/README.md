@@ -62,7 +62,7 @@ Finalmente para lanzar la aplicación hay que volver a ejecutar el script `studi
 
 ### macOS
 
-La instalación en el SO de Apple es similar a la de Linux, excepto que en este caso se decarga un archivo ¿`.dmg`?. Después de descargar, la aplicación Android Studio se debe mover a la carpeta `Aplicaciones`, como es habitual en macOs. En la primera ejecución se instalará el SDK, al igual que en Linux. Para lanzar el programa fácilmente, un _alias_, igul que en Linux.
+La instalación en el SO de Apple es similar a la de Linux, excepto que en este caso se descarga un archivo `.dmg`. Después de descargar, la aplicación Android Studio se debe mover a la carpeta `Aplicaciones`, como es habitual en macOs. En la primera ejecución se instalará el SDK, al igual que en Linux. Para lanzar el programa fácilmente, un _alias_, igual que en Linux.
 
 ### Windows 
 
@@ -228,7 +228,16 @@ Una vez instalada nuestra App en el móvil con _gradlew_ (como se ha dicho arrib
 adb devices -l
 ```
 
-Si aparece conectado, podemos listar todos los _packages_ instalados en el dispositivo, para eso usamos la sub-orden 'pm' (_package manager_) de ADB:
+A modo de ejemplo, con un dispositivo _Pixel 8_ de Google, obtengo: 
+
+```
+* daemon not running; starting now at tcp:5037
+* daemon started successfully
+List of devices attached
+38091FDJG00CU2         device usb:3-4 product:husky model:Pixel_8_Pro device:husky transport_id:1
+```
+
+Podemos listar todos los _packages_ instalados en el dispositivo, para eso usamos la sub-orden 'pm' (_package manager_) de ADB:
 
 ```
 adb shell pm list packages 
