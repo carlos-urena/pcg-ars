@@ -65,8 +65,8 @@ Para conectar un dispositivo con USB y ejecutar la App en dicho dispositivo, seg
 
 Los fuentes de los shaders se guardan en el _Assets folder_, lo he creado en la carpeta `app`,
 
-    - En AS, pincho con el botón derecho en esa carpeta y selecciono _New - Folder - Assets Folder_
-    - Dentro de ese folder, he creado el folder `shaders`, y dentro de ese creo los archivos con extensión `.glsl` (con _New --> File_)
+- En AS, pincho con el botón derecho en esa carpeta y selecciono _New - Folder - Assets Folder_
+- Dentro de ese folder, he creado el folder `shaders`, y dentro de ese creo los archivos con extensión `.glsl` (con _New --> File_)
  
 
 ## Plugin de shaders GLSL
