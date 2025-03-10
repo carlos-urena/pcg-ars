@@ -86,7 +86,7 @@ class OpenGLES30Activity : Activity()
     // ---------------------------------------------------------------------------------------
 
     /**
-     * Funcicon que aniade widgets de pruebas
+     * Función que añade widgets de pruebas
      */
     private fun anadirWidgets() {
 
@@ -103,7 +103,11 @@ class OpenGLES30Activity : Activity()
         lp.gravity = Gravity.TOP or Gravity.END
         addContentView( button, lp )
     }
+    // ---------------------------------------------------------------------------------------
 
+    /**
+     * Función que se ejecuta cuando se pulsa el botón de pruebas
+     */
     private fun showPopupMenu(anchor: View?) {
         val TAGF : String = "[OpenGLES30Activity.showPopupMenu]"
         Log.v( TAGF, "** menú pulsado **")
@@ -111,7 +115,12 @@ class OpenGLES30Activity : Activity()
         //popupWindow = PopupWindow(menuView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, true)
         //popupWindow.showAsDropDown(anchor)
     }
+    // ---------------------------------------------------------------------------------------
 
+
+    /**
+     * 'companion object': incluye las variables y métodos de clase
+     */
     companion object {
         public var instancia : OpenGLES30Activity? = null
     }
