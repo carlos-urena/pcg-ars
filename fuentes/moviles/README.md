@@ -92,7 +92,8 @@ Es conveniente instalar la extensión GLSL, para poder editar fácilmente el có
 
 ### Edición
 
-Los fuentes del proyecto se pueden editar con el editor de Android Studio, son archivos de extensión `.kt` (fuentes Kotlin). El editor señala todos los posibles errores, si bien a veces pueden ocurrir errores al ejecutar que no han sido señalados por el editor ni el compilador
+Los fuentes del proyecto se pueden editar con el editor de Android Studio, son archivos de extensión `.kt` (fuentes Kotlin). El editor señala todos los posibles errores, si bien a veces pueden ocurrir errores al ejecutar que no han sido señalados por el editor ni el compilador.
+
 
 ### Compilación 
 
@@ -197,6 +198,11 @@ La primera vez tardará, pero acaba en un tiempo razonable incluso en ordenadore
 Si hubiese algún error durante la compilación de los fuentes, aparecerán en el terminal los correspondientes mensajes de error (con "e:")
 
 Los archivos fuente se pueden editar con cualquier editor o IDE, no necesariamente AS. Cada vez que se haga un _build_, se recompilarán los fuentes afectados por los cambios desde el último _build_.
+Los archivos fuente de este proyecto están situados en esta sub-carpeta: 
+
+``` 
+proyecto.android-studio/app/src/main/java/mds/pcg1
+``` 
 
 #### Instalación y ejecución (Linux)
 
