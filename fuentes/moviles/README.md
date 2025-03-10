@@ -280,7 +280,7 @@ En la salida debe aparecer una linea con `uid=N`, donde _N_ es un número identi
 adb shell dumpsys package mds.pcg1 | grep uid
 ```
 
-A modo de ejemplo, esta última orden produce una salida como esta: 
+A modo de ejemplo, esta última orden produce una salida como esta (en la cual el UID es 10294)
 
 ```
 uid=10294 gids=[] type=0 prot=signature
