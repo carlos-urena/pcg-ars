@@ -1,6 +1,7 @@
 #version 300 es
 
 precision highp float ; // debe coincidir con el FS (puede no estar)
+precision highp int ; // necesario para dispositivo virtual "Medium API 35" en macOs ¿?
 
 #define MAX_NUM_LUCES 8
 

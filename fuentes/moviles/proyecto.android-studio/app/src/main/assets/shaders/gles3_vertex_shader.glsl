@@ -1,6 +1,8 @@
 #version 300 es
 
 precision highp float ; // debe coincidir con el FS
+precision highp int ; // necesario para dispositivo virtual "Medium API 35" en macOs ¿?
+
 
 // 1. tipo de normales para iluminación
 uniform bool  u_usar_normales_tri ;     // true --> normal triángulo, true --> normal interpolada de los vértices
