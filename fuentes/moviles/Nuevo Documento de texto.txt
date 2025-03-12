@@ -1,0 +1,7 @@
+Windows:
+
+Instalo Android Studio (versión "Merkaat" en Marzo de 2025)
+Lo lanzo
+Se ejecuta el "setup wizard" -->
+    - Elijo "standard" como "type of setup", frente a "custom"
+    - Acepto license agreement
