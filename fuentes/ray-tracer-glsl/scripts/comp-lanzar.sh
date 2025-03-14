@@ -2,15 +2,18 @@
 
 dir_src_ts="../src-ts"
 dir_js="../public_html/js"
-opciones="-strict -noEmitOnError -target ES2022 --outDir ${dir_js}"
-archs_ts=$(ls -1 ${dir_src_ts}/*.ts)
+opciones="-v -strict -noEmitOnError -target ES2022 --outDir ${dir_js}"
+archs_ts=$(ls ${dir_src_ts}/*.ts | xargs ) ## xargs hace que aparezcan todos en una línea
  
 
 ## compilar y obtener resultado en 'res'
-tsc $opciones $archs_ts
+echo "Va TSC ....opciones == [${opciones}], fuentes:"
+ls -la $archs_ts
+tsc -v $opciones $archs_ts
 res=$?
-echo "Resultado == " $res
-
+echo "TSC terminado, resultado == " $res ", generados:" 
+ls -la ../public_html/js
+echo "----"
 
 ## si no ha habido errores, lanzar servidor
 if [ "$res" == "0" ] ; then 

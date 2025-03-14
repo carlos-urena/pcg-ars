@@ -2,12 +2,15 @@
 
 // -----------------------------------------------------------------------------------
 //
-// Carlos Ureña, Apr,2018 (adapted 2024)
+// Carlos Ureña, Apr,2018 (adapted 2024, 2025)
 //
 // -----------------------------------------------------------------------------------
 
 precision highp float ;
 precision highp int ;
+
+// constants 
+const int max_n_stack = 15 ; // 20 ;  // max number of items in the stack
 
 // parámetros uniform
 uniform vec2  iResolution ;     // número de columnas y filas de pixels
@@ -144,7 +147,7 @@ struct RayStackEntry
    float weight ;    // weight of this color in parent ray, if any
 } ;
     
-const int max_n_stack = 10 ; // 20 ;  // max number of items in the stack
+
 
 RayStackEntry  stack[max_n_stack] ;
     
@@ -433,49 +436,25 @@ Ray primary_ray( in vec2 sample_coords, in Camera cam )
     return pray ;
 }
 
-// --------------------------------------------------------------------
-// return background color for ray (which doest not intersect nothing 
+// ---------------------------------------------------------------------
+// Computes background color (that is, the sky color)
 
 vec3 background_color( in Ray ray )
 {
    if ( u_solo_primarios )
       return vec3( 0.0, 0.2, 0.8 );
 
-    float b = max( 0.0, dot( ray.dir, scene.sun_dir ) );
-    if ( 1.0-scene.sun_ap_sin < b )
-        return vec3( 1.0,1.0,1.0 );
-        
-    vec3 d = vec3( ray.dir.x, ray.dir.y/2.0, ray.dir.z ),
-         da = abs( d );
+   const float pi = 3.1415927 ;
+   const float exponent = 1.0 ;
 
-    vec2 cct ;
-    const float fv = 1.5 ;
-
-    vec2 par ;
-    if ( d.y > 0.2  ) // max is 1.5*Y (use x,z)
-    {
-        cct = vec2( 0.5, 0.01 ) ;
-    }
-    else 
-    {
-        const float pi = 3.1415927 ;
-
-        const float nreps_ang = 8.0 ;
-        float ang01 = ((atan( d.x, d.z ) + 0.5*pi) / pi );
-        float angn  = nreps_ang*ang01 ;
-        float angf  = fract( angn );
-        int   angi  = int(angn);
-
-        if ( angi % 2 == 1 )
-            angf = 1.0-angf ;
-            
-        
-        cct = vec2( angf, max( 0.5, 5.0*(1.0-d.y)) );
-    }
-
-    vec4 col = texture( u_textura_0, fract( cct ));
-    return 1.0*pow( col.rgb, 2.0*vec3(1.0, 1.0, 1.0) ) ;
-    //return col.rgb ;
+   vec3 d     = vec3( ray.dir.x, abs(ray.dir.y), ray.dir.z ) ;
+   float ah01 = 1.0- 0.5*(1.0 + atan(d.z, d.x)/pi); // ángulo horizontal en [0,1]  (uso 1.0- para que el sol esté en la dirección 0)
+   float dh   = sqrt( d.x*d.x + d.z*d.z ) ; // longitud de la proy. vertical del rayo
+   float av01 = 2.0*atan(d.y, dh )/pi ; // ángulo vertical en [0,1]
+   vec2  cct  = vec2( ah01, 1.0-av01 );
+   vec4 col   = texture( u_textura_0, cct );
+   
+   return 1.0*pow( col.rgb, vec3( exponent, exponent, exponent) ) ;
     
 }
 // --------------------------------------------------------------------
@@ -603,12 +582,7 @@ vec3 ray_color( in Ray ray )
 {
    int  n = 0;     // number of entries already in the stack 
    vec3 res_color; // resulting color
-   int max_n_efectivo ;
-
-   if ( u_solo_primarios )
-      max_n_efectivo = 1 ;
-   else 
-      max_n_efectivo = max_n_stack ;
+   int  max_n_efectivo = u_solo_primarios ? 1 : max_n_stack ;
 
    // push the first ray
    stack[n].ray       = ray ;
@@ -839,11 +813,11 @@ void main(  )
     scene.sphere5.id      = id_sphere5 ;
     scene.sphere5.center  = vec3( 0.9, 0.25, 0.0 );
     scene.sphere5.radius  = 0.25 ;
-    scene.sphere5.color   = vec3( 0.6, 0.8, 0.0 );
+    scene.sphere5.color   = vec3( 0.8, 1.0, 0.6 );
 
     scene.materials[id_sphere5].ka  = 0.2;
-    scene.materials[id_sphere5].kd  = 0.3;
-    scene.materials[id_sphere5].kph = 0.6;
+    scene.materials[id_sphere5].kd  = 0.8;
+    scene.materials[id_sphere5].kph = 0.5;
     scene.materials[id_sphere5].kps = 0.0;
     scene.materials[id_sphere5].kt  = 0.0;
     
