@@ -26,6 +26,12 @@ export class Vec2 extends Float32Array
    public get x() { return this[0] }
    public get y() { return this[1] }
 
+   public set s( v : number ) { this[0] = v }
+   public set t( v : number ) { this[1] = v }
+
+   public set x( v : number ) { this[0] = v }
+   public set y( v : number ) { this[1] = v }
+
    /**
     * Calcula la longitud de un vector
     */
@@ -83,6 +89,14 @@ export class Vec3 extends Float32Array
    public get r() { return this[0] }
    public get g() { return this[1] }
    public get b() { return this[2] }
+
+   public set x( v : number ) { this[0] = v }
+   public set y( v : number ) { this[1] = v }
+   public set z( v : number ) { this[2] = v }
+
+   public set r( v : number ) { this[0] = v }
+   public set g( v : number ) { this[1] = v }
+   public set b( v : number ) { this[2] = v }
 
    /**
     * Devuelve un nuevo vector con los mismos valores que este (clona)
@@ -244,6 +258,16 @@ export class Vec4 extends Float32Array
    public get g() { return this[1] }
    public get b() { return this[2] }
    public get a() { return this[3] }
+
+   public set x( v : number ) { this[0] = v }
+   public set y( v : number ) { this[1] = v }
+   public set z( v : number ) { this[2] = v }
+   public set w( v : number ) { this[3] = v }
+
+   public set r( v : number ) { this[0] = v }
+   public set g( v : number ) { this[1] = v }
+   public set b( v : number ) { this[2] = v }
+   public set a( v : number ) { this[3] = v }
 
    /**
     * Devuelve un nuevo vector con los mismos valores que este (clona)
