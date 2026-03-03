@@ -1,12 +1,9 @@
-#/bin/bash -f   
-
-
+#!/bin/bash -f   
 
 ## compilar y obtener resultado en 'res'
 make 
 res=$?
 echo "Resultado == " $res
-
 
 ## si no ha habido errores, lanzar servidor
 if [ "$res" == "0" ] ; then 
