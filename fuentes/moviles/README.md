@@ -109,13 +109,15 @@ Android Studio provee de un dispositivo virtual por defecto, que está activado 
 
 Se pueden seleccionar otros dispositivos virtuales disponibles en el gestor de dispositivos, así como configurar sus características.
 
-Si la aplicación se ejecuta en un dispositivo físico, se puede hacer _mirroring_ es decir: se puede visualizar en la ventana de AS en el ordenador una imagen espejo de todo lo que aparece en la pantalla del dispositivo, y además se puede interactuar con la aplicación usando esa imagen espejo. En AS Panda 2 es necesario activar explícitamente esta funcionalidad, en _Setting_ -> _Tools_ -> _Device Mirroring_, y ahí activar los tres botones con rítulos que comienzan con _Activate Mirroring...._
+Si la aplicación se ejecuta en un dispositivo físico, se puede hacer _mirroring_ es decir: se puede visualizar en la ventana de AS en el ordenador una imagen espejo de todo lo que aparece en la pantalla del dispositivo, y además se puede interactuar con la aplicación usando esa imagen espejo. En AS Panda 2 es necesario activar explícitamente esta funcionalidad, en _Settings_ -> _Tools_ -> _Device Mirroring_, y ahí activar los tres botones con rítulos que comienzan con _Activate Mirroring...._.
+
+Durante la ejecución, los mensajes de _log_ (emitidos desde el código con la función `Log.v`) aparecerán en el panel _logcat_, que puede mostrarse pulsando en el botón con un icono de un gato. Para ver los mensajes de la aplicación es necesario, en el panel del _logcat_, seleccionar el dispositivo que se está ejecutando (en el desplegable), y además, justo a la derecha, en el filtro (donde hay un símbolo de un embudo), poner el nombre del paquete, que es `mds.pcg1`.
 
 ### Ejecución en un dispositivo virtual
 
 El proyecto se puede compilar y ejecutar en el dispositivo virtual actual con el botón _Run_, es un triángulo apuntando a la derecha, que aparece en la parte superior de la ventana, cuando la aplicación se puede ejecutar, aparecerá de color verde. Para terminar la ejecución, hay que pulsar el botón _Stop_, es un botón con un recuadro rojo que aparece a la derecha del botón _Run_. 
 
-Durante la ejecución, los mensajes de _log_ (emitidos desde el código con la función `Log.v`) aparecerán en el panel _logcat_, que puede mostrarse pulsando en el botón con un icono de un gato. 
+
 
 Durante la ejecución aparecerá a la derecha una imagen de la pantalla del dispositivo móvil, cuyo modelo es el que selecciones de entre los disponibles (por defecto es un Google Pixel 3A).
 
