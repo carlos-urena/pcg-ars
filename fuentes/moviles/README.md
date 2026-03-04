@@ -23,7 +23,7 @@ Para instalar Android Studio se accede aquí:
 
 ### Linux
 
- Los pasos siguientes de instalación se han probado en Linux (Ubuntu 22.04 LTS) con la versión <i>Android Studio Hedgehog</i> - 2023.1.1 Patch 2 para Linux.
+ Los pasos siguientes de instalación se han probado en Marzo de 2026 en Linux (Ubuntu 24) con la versión <i>Android Studio Panda 2</i> - 2025.3.2.
 
 
 Las instrucciones de instalación están aquí:
@@ -35,6 +35,8 @@ Ahí e dice que en Linux de 64 bits hay que instalar unas librerías adicionales
 ``` 
 sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
 ``` 
+
+La librería `libncurses5` parece que no existe en 2026, en su lugar parece funcionar `libncurses6` (aunque las instrucciones de Google todavía referencian `libncurses5`).
 
 El siguiente paso es descargar de la Web el archivo con Android Studio, en Linux es un `.tar.gz`. Lo descargamos a una carpeta nueva vacía. En esa carpeta, extraemos el archivo. Se puede extraer con el administrador de archivos o en la línea de órdenes con:
 
@@ -62,7 +64,7 @@ Finalmente para lanzar la aplicación hay que volver a ejecutar el script `studi
 
 ### macOS
 
-La instalación en el SO de Apple es similar a la de Linux, excepto que en este caso se descarga un archivo `.dmg`. Después de descargar, la aplicación Android Studio se debe mover a la carpeta `Aplicaciones`, como es habitual en macOs. En la primera ejecución se instalará el SDK, al igual que en Linux. Para lanzar el programa fácilmente, un _alias_, igual que en Linux.
+La instalación en el SO de Apple es similar a la de Linux, excepto que en este caso se descarga un archivo `.dmg`. Después de descargar, la aplicación Android Studio se debe mover a la carpeta `Aplicaciones`, como es habitual en _macOs_. En la primera ejecución se instalará el SDK, al igual que en Linux. Para lanzar el programa fácilmente se puede usar un _alias_, igual que en Linux.
 
 ### Windows 
 
@@ -74,19 +76,19 @@ Aunque en esta asignatura los estudiantes abrirán un proyecto ya creado, en est
 
 [Creacion del proyecto](README-crea.md)
 
-## Uso del proyecto _Android Studio_
+## Uso del proyecto _Android Studio_ 
 
 
-### Abrir el proyecto en AS 
+### Abrir el proyecto en _Android Studio_
 
 
-Lanzar la aplicación _Android Studio_, y abrir el proyecto que está en esta carpeta 
+Lanzar la aplicación _Android Studio_, y abrir el proyecto, para eso hay que seleccionar la carpeta:
 
 ``` 
 proyecto.android-studio
 ``` 
 
-Para abrir ese proyecto se puede seleccionar directamente de la lista de proyectos abiertos en el pasado, o bien (la primera vez) pulsar el botón _open_ y navegar hasta la carpeta que contiene `proyecto.android-studio` y seleccionarla.
+Para abrir ese proyecto se puede seleccionar directamente de la lista de proyectos abiertos en el pasado, o bien (la primera vez) pulsar el botón _open_ y navegar hasta la carpeta padre de `proyecto.android-studio` y seleccionar esta subcarpeta.
 
 Es conveniente instalar la extensión GLSL, para poder editar fácilmente el código en los shaders.
 
@@ -106,6 +108,8 @@ Android Studio puede tener uno o varios dispositivos en ejecución, cada uno de 
 Android Studio provee de un dispositivo virtual por defecto, que está activado al inicio. En el gestor de dispositivos podemos ver la pantalla de ese dispositivo.
 
 Se pueden seleccionar otros dispositivos virtuales disponibles en el gestor de dispositivos, así como configurar sus características.
+
+Si la aplicación se ejecuta en un dispositivo físico, se puede hacer _mirroring_ es decir: se puede visualizar en la ventana de AS en el ordenador una imagen espejo de todo lo que aparece en la pantalla del dispositivo, y además se puede interactuar con la aplicación usando esa imagen espejo. En AS Panda 2 es necesario activar explícitamente esta funcionalidad, en _Setting_ -> _Tools_ -> _Device Mirroring_, y ahí activar los tres botones con rítulos que comienzan con _Activate Mirroring...._
 
 ### Ejecución en un dispositivo virtual
 
