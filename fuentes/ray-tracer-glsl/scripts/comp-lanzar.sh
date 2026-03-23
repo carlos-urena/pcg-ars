@@ -1,19 +1,28 @@
 #/bin/bash -f   
 
+## -----------------------------------------------------------------------------------
+## Ray-tracer en un fragment shader con WebGL 
+## Script para recompilar todos los fuentes typescript y lanzar el servidor sin cache.
+##
+## Última modificación: 23 de Marzo de 2026 (se elimina opción -v errónea, se añaden estos comentarios).
+## -----------------------------------------------------------------------------------
+
 dir_src_ts="../src-ts"
 dir_js="../public_html/js"
-opciones="-v -strict -noEmitOnError -target ES2022 --outDir ${dir_js}"
+opciones=" -strict -noEmitOnError -target ES2022 --outDir ${dir_js}"
 archs_ts=$(ls ${dir_src_ts}/*.ts | xargs ) ## xargs hace que aparezcan todos en una línea
+
  
 
 ## compilar y obtener resultado en 'res'
 echo "Va TSC ....opciones == [${opciones}], fuentes:"
-ls -la $archs_ts
-tsc -v $opciones $archs_ts
+ls -la ${archs_ts}
+echo "Lista de archivos TS a compilar: [${archs_ts}]"
+tsc  ${opciones} ${archs_ts}
 res=$?
-echo "TSC terminado, resultado == " $res ", generados:" 
+echo "TSC terminado, resultado == " ${res} ", generados:" 
 ls -la ../public_html/js
-echo "----"
+echo "----------------------------------"
 
 ## si no ha habido errores, lanzar servidor
 if [ "$res" == "0" ] ; then 

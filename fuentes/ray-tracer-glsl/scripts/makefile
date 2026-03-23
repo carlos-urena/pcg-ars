@@ -1,6 +1,14 @@
 .SUFFIXES:
 .PHONY: all
 
+## -----------------------------------------------------------------------------------
+## Ray-tracer en un fragment shader con WebGL 
+## Makefile para recompilar todos los fuentes 
+## (si es necesario, si ya están compilados no hace nada)
+##
+## Última modificación: 23 de Marzo de 2026 (se añade este bloque de comentarios).
+## -----------------------------------------------------------------------------------
+
 dir_src_ts  := ../src-ts
 dir_js      := ../public_html/js
 opciones    := -strict -noEmitOnError -target ES2022 --outDir $(dir_js) 
