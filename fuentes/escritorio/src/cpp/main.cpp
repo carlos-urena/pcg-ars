@@ -77,7 +77,7 @@ AplicacionBase * CrearAplicacion( int argc, char * argv[] )
 int main( int argc, char *argv[] )
 {   
    using namespace std ;
-   cout << "PCG (MDS) - curso 2023-24 (" << NOMBRE_OS << ")" << endl ;
+   cout << "PCG (MDS) - curso 2025-26 (" << NOMBRE_OS << ")" << endl ;
 
    // crear la aplicación en función de la línea de órdenes: 2D, 3D con OpenGL 3.3, o 3D con OpenGL 4.5.
    AplicacionBase * apl = CrearAplicacion( argc, argv ) ;
