@@ -157,9 +157,46 @@ void AplicacionBase::inicializarGLFW( const unsigned major, const unsigned minor
    // Tendrán la posicion y tamaño de la ventana y el framebuffer
    int fbx, fby, wx, wy, px, py ; 
 
+   const char * glfw_ver_str = glfwGetVersionString() ;
+   cout << "GLFW version string   : " << glfw_ver_str << endl ;
+   cout << "GLFW semantic version : " << GLFW_VERSION_MAJOR << "." << GLFW_VERSION_MINOR << "." << GLFW_VERSION_REVISION << endl ;  
+
+   #if (GLFW_VERSION_MAJOR > 3) || (GLFW_VERSION_MAJOR == 3 && GLFW_VERSION_MINOR >= 4)
+   const bool 
+      x11_supported     = (bool) glfwPlatformSupported(GLFW_PLATFORM_X11) ,
+      wayland_supported = (bool) glfwPlatformSupported(GLFW_PLATFORM_WAYLAND)  ;
+   cout 
+      << "X11 supported     : " << (x11_supported ? "yes" : "no") << endl 
+      << "Wayland supported : " << (wayland_supported ? "yes" : "no") << endl ;
+
+   #ifdef __linux__
+   if ( x11_supported && wayland_supported)
+      glfwInitHint( GLFW_PLATFORM, GLFW_PLATFORM_X11 );
+   #endif
+   #endif 
+
    // Inicializacion y configuracion de la librería GLFW:
    glfwSetErrorCallback( ErrorGLFW ); // fijar función llamada ante error (aborta, ver 'utilidades.cpp')
-   glfwInit() ;                       // inicializacion de GLFW
+   if ( !glfwInit() ) // inicializacion de GLFW
+   {
+      cerr << "Error al inicializar GLFW" << endl ;
+      exit(1);
+   }
+
+   #if (GLFW_VERSION_MAJOR > 3) || (GLFW_VERSION_MAJOR == 3 && GLFW_VERSION_MINOR >= 4) 
+   const int platform = glfwGetPlatform();
+   cout << "GLFW platform in use: " ;
+   if ( platform == GLFW_PLATFORM_WAYLAND )
+      cout << "Wayland" << endl ;
+   else if ( platform == GLFW_PLATFORM_X11 )
+      cout << "X11" << endl ;
+   else if ( platform == GLFW_PLATFORM_COCOA )
+      cout << "Cocoa" << endl ;
+   else if ( platform == GLFW_PLATFORM_WIN32 )
+      cout << "Windows" << endl ;
+   else
+      cout << "unknown" << endl ;
+   #endif
 
    // Especificar versión de OpenGL y parámetros de compatibilidad que se querrán
    // * En macOS, intentar abrir siempre OpenGL 4.1
